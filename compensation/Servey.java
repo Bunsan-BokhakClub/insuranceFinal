@@ -1,6 +1,6 @@
-package project.compensation;
+package compensation;
 
-import project.partner.Partner;
+import partner.Partner;
 
 public class Servey {
 
@@ -8,7 +8,7 @@ public class Servey {
 	private int insuranceID;
 	private int managerName;
 	private int serveyAmount;
-	public Partner m_Partner;
+	public Partner partner;
 
 	public Servey(){
 

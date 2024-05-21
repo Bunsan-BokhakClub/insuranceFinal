@@ -1,4 +1,4 @@
-package project.payment;
+package payment;
 
 import java.util.ArrayList;
 

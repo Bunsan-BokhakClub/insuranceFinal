@@ -1,4 +1,4 @@
-package project.contract;
+package contract;
 
 import java.util.ArrayList;
 

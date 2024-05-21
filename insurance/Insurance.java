@@ -1,6 +1,6 @@
-package project.Insurance;
+package insurance;
 
-import project.contract.Contract;
+import contract.Contract;
 
 public class Insurance {
 

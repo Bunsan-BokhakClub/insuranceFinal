@@ -1,4 +1,4 @@
-package project.payment;
+package payment;
 
 public interface PaymentList {
 

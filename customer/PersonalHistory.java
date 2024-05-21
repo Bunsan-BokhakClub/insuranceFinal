@@ -1,4 +1,4 @@
-package project.customer;
+package customer;
 
 public class PersonalHistory {
 

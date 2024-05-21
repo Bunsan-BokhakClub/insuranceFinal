@@ -1,8 +1,8 @@
-package project.employee;
+package employee;
 
-import project.contract.Contract;
-import project.employee.sellingRecord.SellingRecord;
-import project.payment.Payment;
+import contract.Contract;
+import employee.sellingRecord.SellingRecord;
+import payment.Payment;
 
 public class Employee {
 

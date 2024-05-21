@@ -1,4 +1,4 @@
-package project.employee.sellingRecord;
+package employee.sellingRecord;
 
 public interface SellingRecordList {
 

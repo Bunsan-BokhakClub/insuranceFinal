@@ -1,6 +1,5 @@
-package project.Insurance;
+package insurance;
 
-import project.Insurance.Insurance;
 
 public class HomeInsurance extends Insurance {
 

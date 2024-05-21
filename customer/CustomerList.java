@@ -1,4 +1,4 @@
-package project.customer;
+package customer;
 
 public interface CustomerList {
 	public void add();
