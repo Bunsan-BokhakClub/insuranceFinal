@@ -1,4 +1,4 @@
-package project.complaint;
+package complaint;
 
 public class Complaint {
 

@@ -1,4 +1,4 @@
-package project.compensation;
+package compensation;
 
 public class CompensationClaim {
 
@@ -8,7 +8,7 @@ public class CompensationClaim {
 	private String documentFile;
 	private String insuranceID;
 	private String insuranceName;
-	public Servey m_Servey;
+	public Servey servey;
 
 	public CompensationClaim(){
 

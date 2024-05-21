@@ -1,6 +1,4 @@
-package project.Insurance;
-
-import java.util.ArrayList;
+package insurance;
 
 public interface InsuranceList {
 

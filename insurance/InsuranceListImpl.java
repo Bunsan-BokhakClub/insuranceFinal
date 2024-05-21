@@ -1,6 +1,4 @@
-package project.Insurance;
-
-import project.Insurance.Insurance;
+package insurance;
 
 import java.util.ArrayList;
 

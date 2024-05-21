@@ -1,7 +1,4 @@
-package project.compensation;
-
-import project.compensation.CompensationClaim;
-import project.compensation.CompensationClaimList;
+package compensation;
 
 import java.util.ArrayList;
 

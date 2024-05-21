@@ -1,7 +1,7 @@
-package project.customer;
+package customer;
 
-import project.complaint.ComplaintListImpl;
-import project.contract.Contract;
+import complaint.ComplaintListImpl;
+import contract.Contract;
 
 public class Customer {
 
@@ -13,12 +13,12 @@ public class Customer {
 	private String gender;
 	private String name;
 	private String phoneNumber;
-	public ComplaintListImpl m_ComplaintListImpl;
+	public ComplaintListImpl complaintListImpl;
 	public FamilyHistory familyHistory;
 	public Contract contract;
 	public PersonalHistory personalHistory;
 
-	public Customer(String adress, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl m_ComplaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
+	public Customer(String adress, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl complaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
 		this.adress = adress;
 		this.age = age;
 		this.birth = birth;
@@ -27,7 +27,7 @@ public class Customer {
 		this.gender = gender;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
-		this.m_ComplaintListImpl = m_ComplaintListImpl;
+		this.complaintListImpl = complaintListImpl;
 		this.familyHistory = familyHistory;
 		this.contract = contract;
 		this.personalHistory = personalHistory;

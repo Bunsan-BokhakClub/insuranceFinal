@@ -1,4 +1,4 @@
-package project.Insurance;
+package insurance;
 
 public class CarInsurance extends Insurance {
 

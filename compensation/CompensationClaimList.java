@@ -1,4 +1,4 @@
-package project.compensation;
+package compensation;
 
 public interface CompensationClaimList {
 

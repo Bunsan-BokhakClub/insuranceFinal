@@ -1,4 +1,4 @@
-package project.customer;
+package customer;
 
 public class FamilyHistory {
 
@@ -8,7 +8,6 @@ public class FamilyHistory {
 	public FamilyHistory(){
 
 	}
-
 
 	public String getDiseaseName(){
 		return "";

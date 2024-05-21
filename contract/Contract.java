@@ -1,6 +1,6 @@
-package project.contract;
+package contract;
 
-import project.compensation.CompensationClaim;
+import compensation.CompensationClaim;
 
 public class Contract {
 
@@ -22,7 +22,7 @@ public class Contract {
 	private int paymentAmount;
 	private int paymentCycle;
 	private String phoneNumber;
-	public CompensationClaim m_CompensationClaim;
+	public CompensationClaim compensationClaim;
 
 	public Contract(){
 

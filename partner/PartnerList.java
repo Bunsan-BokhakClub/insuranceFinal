@@ -1,4 +1,4 @@
-package project.partner;
+package partner;
 
 public interface PartnerList {
 
