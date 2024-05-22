@@ -3,8 +3,7 @@ import compensation.CompensationClaimListImpl;
 import compensation.Servey;
 import contract.Contract;
 import contract.ContractListImpl;
-import insurance.Insurance;
-import insurance.InsuranceListImpl;
+import insurance.*;
 import partner.Partner;
 import partner.PartnerListImpl;
 import payment.Payment;
@@ -14,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
@@ -246,6 +246,11 @@ public class Main {
     public static void registerInsurance() throws IOException {
         System.out.println("보험 등록을 처리합니다.\n");
 
+        System.out.println("보험종류");
+        System.out.println("1. 일반보험 || 2. 건강보험 || 3. 자동차보험 || 4. 여행자보험");
+        System.out.println("등록하실 보험 종류의 숫자를 입력해주세요");
+        int insuranceType = Integer.parseInt(br.readLine().trim());
+
         System.out.print("보험 이름: ");
         String insuranceName = br.readLine().trim();
 
@@ -267,9 +272,57 @@ public class Main {
         Insurance insurance = new Insurance(insuranceIndex++, insuranceName, compensationAmount, renewalStatus,
                 insurancePremium, renewalCycle, insurancePeriod);
 
-        insuranceList.add(insurance);
+        switch (insuranceType) {
+            case 1:
+                insuranceList.add(insurance);
+                break;
+            case 2:
+                registerHealthInsurance(insurance);
+                break;
+            case 3:
+                registerCarInsurance(insurance);
+                break;
+            case 4:
+                registerTravelInsurance(insurance);
+                break;
+        }
 
         System.out.println("\n신규 보험 등록이 완료되었습니다.");
+    }
+
+    private static void registerHealthInsurance(Insurance insurance) throws IOException {
+        System.out.print("보장 질환 목록 (쉼표로 구분하여 입력하세요): ");
+        String[] diseases = br.readLine().trim().split(",");
+        ArrayList<String> diseaseList = new ArrayList<>(Arrays.asList(diseases));
+
+        Insurance healthInsurance = new HealthInsurance(insurance, diseaseList);
+        insuranceList.add(healthInsurance);
+    }
+
+    private static void registerCarInsurance(Insurance insurance) throws IOException {
+        System.out.print("자동차 모델: ");
+        String carModel = br.readLine().trim();
+
+        System.out.print("주행 거리: ");
+        int carDistance = Integer.parseInt(br.readLine().trim());
+
+        System.out.print("자동차 생산 연도: ");
+        String carYear = br.readLine().trim();
+
+        Insurance carInsurance = new CarInsurance(insurance, carDistance, carModel, carYear);
+
+        insuranceList.add(carInsurance);
+    }
+
+    private static void registerTravelInsurance(Insurance insurance) throws IOException {
+        System.out.print("여행 국가명: ");
+        String countryName = br.readLine().trim();
+
+        System.out.print("여행 날짜: ");
+        int travelDate = Integer.parseInt(br.readLine().trim());
+
+        Insurance travelInsurance = new TravelInsurance(insurance, countryName, travelDate);
+        insuranceList.add(travelInsurance);
     }
 
     public static void modifyInsurance() throws IOException {

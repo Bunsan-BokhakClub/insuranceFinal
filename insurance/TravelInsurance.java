@@ -1,14 +1,12 @@
 package insurance;
 
-import contract.Contract;
-
 public class TravelInsurance extends Insurance {
 
 	private String countryName;
 	private int travelDate;
 
-	public TravelInsurance(int compensationAmount, String cycleType, String insuranceName, String insuranceID, int paymentAmount, String paymentCycle, Contract contract, String countryName, int travelDate) {
-		super(compensationAmount, cycleType, insuranceName, insuranceID, paymentAmount, paymentCycle, contract);
+	public TravelInsurance(Insurance insurance, String countryName, int travelDate) {
+		super(insurance);
 		this.countryName = countryName;
 		this.travelDate = travelDate;
 	}

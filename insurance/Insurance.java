@@ -1,7 +1,5 @@
 package insurance;
 
-import contract.Contract;
-
 public class Insurance {
 
 	private int compensationAmount;
@@ -21,6 +19,16 @@ public class Insurance {
 		this.paymentAmount = paymentAmount;
 		this.paymentCycle = Integer.toString(paymentCycle);
 		this.insurancePeriod = Integer.toString(insurancePeriod);
+	}
+
+	public Insurance(Insurance insurance) {
+		this.insuranceID = insurance.getInsuranceID();
+		this.compensationAmount = insurance.getCompensationAmount();
+		this.cycleType = insurance.getCycleType();
+		this.insuranceName = insurance.getInsuranceName();
+		this.paymentAmount = insurance.getPaymentAmount();
+		this.paymentCycle = insurance.getPaymentCycle();
+		this.insurancePeriod = insurance.getInsurancePeriod();
 	}
 
 	public String getInsuranceName() {

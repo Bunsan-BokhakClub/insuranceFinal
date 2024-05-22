@@ -1,7 +1,5 @@
 package contract;
 
-import insurance.Insurance;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
