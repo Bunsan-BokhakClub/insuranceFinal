@@ -27,7 +27,8 @@ public class Main {
     private static InsuranceListImpl insuranceList;
     private static PaymentListImpl paymentList;
 
-    public Main() {
+
+    public static void main(String[] args) throws IOException {
         ArrayList<Insurance> insList = new ArrayList<>();
         insuranceList = new InsuranceListImpl(insList);
 
@@ -42,9 +43,7 @@ public class Main {
 
         ArrayList<Payment> payList = new ArrayList<>();
         paymentList = new PaymentListImpl(payList);
-    }
 
-    public static void main(String[] args) throws IOException {
         String userChoice = "";
         while (!userChoice.equals("x")) {
             showMenu();
