@@ -1,29 +1,43 @@
 package contract;
 
+import insurance.Insurance;
+
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ContractListImpl implements ContractList {
 
     public ArrayList<Contract> contractList;
-    public Contract contract;
 
-    @Override
-    public void add() {
-
+    public ContractListImpl(ArrayList<Contract> contractList) {
+        this.contractList = contractList;
     }
 
     @Override
-    public void delete() {
-
+    public void add(Contract contract) {
+        contractList.add(contract);
     }
 
     @Override
-    public void get() {
-
+    public Contract getContractByNameAndPN(String cusName, String pN) {
+        return contractList.stream()
+                .filter(contract -> contract.getCustomerName().equals(cusName))
+                .filter(contract -> contract.getPhoneNumber().equals(pN))
+                .findFirst()
+                .orElse(null);
     }
 
-    @Override
-    public void update() {
+    public ArrayList<Contract> getContractListByCusName(String cusName) {
+        return contractList.stream()
+                .filter(contract -> contract.getCustomerName().equalsIgnoreCase(cusName))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public Contract getContractByInsName(String insName) {
+        return contractList.stream()
+                .filter(contract -> contract.getInsuranceName().equals(insName))
+                .findFirst()
+                .orElse(null);
 
     }
 }

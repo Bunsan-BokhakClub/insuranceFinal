@@ -10,26 +10,72 @@ public class Insurance {
 	private String insuranceID;
 	private int paymentAmount;
 	private String paymentCycle;
-	public Contract contract;
+	private String insurancePeriod;
 
-	public Insurance(){
-
+	public Insurance(int insuranceID, String insuranceName, int compensationAmount, String cycleType,
+					 int paymentAmount, int paymentCycle, int insurancePeriod) {
+		this.insuranceID = Integer.toString(insuranceID);
+		this.compensationAmount = compensationAmount;
+		this.cycleType = cycleType;
+		this.insuranceName = insuranceName;
+		this.paymentAmount = paymentAmount;
+		this.paymentCycle = Integer.toString(paymentCycle);
+		this.insurancePeriod = Integer.toString(insurancePeriod);
 	}
 
-	public void updateCompensation(){
-
+	public String getInsuranceName() {
+		return insuranceName;
 	}
 
-	public void updateinsuranceName(){
-
+	public String getInsuranceID() {
+		return insuranceID;
 	}
 
-	public void updatePayment(){
-
+	public int getCompensationAmount() {
+		return compensationAmount;
 	}
 
-	public void updatePaymentCycle(){
-
+	public String getCycleType() {
+		return cycleType;
 	}
 
+	public int getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	public String getPaymentCycle() {
+		return paymentCycle;
+	}
+
+	public String getInsurancePeriod() {
+		return insurancePeriod;
+	}
+
+	public void setCompensationAmount(int compensationAmount) {
+		this.compensationAmount = compensationAmount;
+	}
+
+	public void setCycleType(String cycleType) {
+		this.cycleType = cycleType;
+	}
+
+	public void setInsuranceName(String insuranceName) {
+		this.insuranceName = insuranceName;
+	}
+
+	public void setInsuranceID(String insuranceID) {
+		this.insuranceID = insuranceID;
+	}
+
+	public void setPaymentAmount(int paymentAmount) {
+		this.paymentAmount = paymentAmount;
+	}
+
+	public void setPaymentCycle(String paymentCycle) {
+		this.paymentCycle = paymentCycle;
+	}
+
+	public void setInsurancePeriod(String insurancePeriod) {
+		this.insurancePeriod = insurancePeriod;
+	}
 }

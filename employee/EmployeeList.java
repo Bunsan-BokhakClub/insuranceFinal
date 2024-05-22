@@ -2,12 +2,12 @@ package employee;
 
 public interface EmployeeList {
 
-	public void add();
+	void add();
 
-	public void delete();
+	void delete();
 
-	public void get();
+	void get();
 
-	public void update();
+	void update();
 
 }

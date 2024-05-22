@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class PartnerListImpl implements PartnerList {
 
 	private ArrayList<Partner> partnerList;
-	public Partner partner;
 
-	public PartnerListImpl(){
-
+	public PartnerListImpl(ArrayList<Partner> partnerList) {
+		this.partnerList = partnerList;
 	}
-
 
 	public void add(){
 
@@ -20,8 +18,11 @@ public class PartnerListImpl implements PartnerList {
 
 	}
 
-	public void get(){
-
+	public Partner getPartnerByName(String name){
+		return partnerList.stream()
+				.filter(partner -> partner.getPartnerName().equals(name))
+				.findFirst()
+				.orElse(null);
 	}
 
 	public void update(){

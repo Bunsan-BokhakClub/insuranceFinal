@@ -15,32 +15,15 @@ public class Employee {
 	public Contract contract;
 	public Payment payment;
 
-	public Employee(){
-
-	}
-
-	public void addSellingRecord(){
-
-	}
-
-	public String getEmployeeName(){
-		return "";
-	}
-
-	public String getEmployeePhoneNumber(){
-		return "";
-	}
-
-	public void updateEmployeeName(){
-
-	}
-
-	public void updateEmployeePhoneNumber(){
-
-	}
-
-	public void updatePosition(){
-
+	public Employee(String employeeID, String employeeName, String employeePhoneNumber, String incidentDate, String position, SellingRecord sellingRecord, Contract contract, Payment payment) {
+		this.employeeID = employeeID;
+		this.employeeName = employeeName;
+		this.employeePhoneNumber = employeePhoneNumber;
+		this.incidentDate = incidentDate;
+		this.position = position;
+		this.sellingRecord = sellingRecord;
+		this.contract = contract;
+		this.payment = payment;
 	}
 
 }

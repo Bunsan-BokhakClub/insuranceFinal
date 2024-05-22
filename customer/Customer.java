@@ -5,7 +5,7 @@ import contract.Contract;
 
 public class Customer {
 
-	private String adress;
+	private String address;
 	private int age;
 	private String birth;
 	private String customerID;
@@ -18,8 +18,8 @@ public class Customer {
 	public Contract contract;
 	public PersonalHistory personalHistory;
 
-	public Customer(String adress, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl complaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
-		this.adress = adress;
+	public Customer(String address, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl complaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
+		this.address = address;
 		this.age = age;
 		this.birth = birth;
 		this.customerID = customerID;
@@ -33,35 +33,33 @@ public class Customer {
 		this.personalHistory = personalHistory;
 	}
 
-	public Customer(){
-
-	}
-
 	public String getCustomerID(){
-		return "";
+		return customerID;
 	}
 
 	public String getCustomerName(){
-		return "";
+		return name;
 	}
 
 	public String getCustomerPhoneNumber(){
-		return "";
+		return phoneNumber;
 	}
 
-	public void updateAdress(){
-
+	public void updateAddress(String address) {
+		this.address = address;
 	}
 
-	public void updateCustomerName(){
-
+	public void updateCustomerName(String name) {
+		this.name = name;
 	}
 
-	public void updateEmail(){
-
+	public void updateEmail(String email) {
+		this.email = email;
 	}
 
-	public void updatePhoneNumber(){
-
+	public void updatePhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
+
+
 }

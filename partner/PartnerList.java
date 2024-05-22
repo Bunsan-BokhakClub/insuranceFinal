@@ -2,12 +2,12 @@ package partner;
 
 public interface PartnerList {
 
-	public void add();
+	void add();
 
-	public void delete();
+	void delete();
 
-	public void get();
+	Partner getPartnerByName(String name);
 
-	public void update();
+	void update();
 
 }
