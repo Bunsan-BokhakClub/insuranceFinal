@@ -1,9 +1,9 @@
 package customer;
 
 public interface CustomerList {
-	public void add();
+	public void add(Customer customer);
 
-	public void delete();
+	public void delete(String customerID);
 
 	public void get();
 

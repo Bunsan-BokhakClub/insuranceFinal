@@ -1,13 +1,16 @@
 package insurance;
 
+import java.util.List;
+
 public interface InsuranceList {
 
-	public void add();
+	void add(Insurance insurance);
 
-	public void delete();
+	void delete(String insuranceID);
 
-	public void get();
+	Insurance getInsuranceByID(String insuranceID);
 
-	public void update();
+	List<Insurance> getListByUserId(String customerID);
 
+	void update(Insurance insurance);
 }

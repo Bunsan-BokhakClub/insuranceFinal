@@ -6,7 +6,8 @@ public class HealthInsurance extends Insurance {
 
 	private ArrayList<String> DiseaseList;
 
-	public HealthInsurance(){
-
+	public HealthInsurance(String insuranceID, String insuranceName, int paymentAmount, ArrayList<String> diseaseList) {
+		super(insuranceID, insuranceName, paymentAmount);
+		DiseaseList = diseaseList;
 	}
 }

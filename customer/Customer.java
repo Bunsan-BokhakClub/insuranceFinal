@@ -5,7 +5,7 @@ import contract.Contract;
 
 public class Customer {
 
-	private String adress;
+	private String address;
 	private int age;
 	private String birth;
 	private String customerID;
@@ -18,8 +18,8 @@ public class Customer {
 	public Contract contract;
 	public PersonalHistory personalHistory;
 
-	public Customer(String adress, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl complaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
-		this.adress = adress;
+	public Customer(String address, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl complaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
+		this.address = address;
 		this.age = age;
 		this.birth = birth;
 		this.customerID = customerID;
@@ -33,35 +33,100 @@ public class Customer {
 		this.personalHistory = personalHistory;
 	}
 
-	public Customer(){
 
+	public String getAddress() {
+		return address;
 	}
 
-	public String getCustomerID(){
-		return "";
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getCustomerName(){
-		return "";
+	public int getAge() {
+		return age;
 	}
 
-	public String getCustomerPhoneNumber(){
-		return "";
+	public void setAge(int age) {
+		this.age = age;
 	}
 
-	public void updateAdress(){
-
+	public String getBirth() {
+		return birth;
 	}
 
-	public void updateCustomerName(){
-
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
-	public void updateEmail(){
-
+	public String getCustomerID() {
+		return customerID;
 	}
 
-	public void updatePhoneNumber(){
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public ComplaintListImpl getComplaintListImpl() {
+		return complaintListImpl;
+	}
+
+	public void setComplaintListImpl(ComplaintListImpl complaintListImpl) {
+		this.complaintListImpl = complaintListImpl;
+	}
+
+	public FamilyHistory getFamilyHistory() {
+		return familyHistory;
+	}
+
+	public void setFamilyHistory(FamilyHistory familyHistory) {
+		this.familyHistory = familyHistory;
+	}
+
+	public Contract getContract() {
+		return contract;
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
+
+	public PersonalHistory getPersonalHistory() {
+		return personalHistory;
+	}
+
+	public void setPersonalHistory(PersonalHistory personalHistory) {
+		this.personalHistory = personalHistory;
 	}
 }

@@ -1,35 +1,55 @@
 package insurance;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InsuranceListImpl implements InsuranceList {
 
     private ArrayList<Insurance> insuranceList;
     public Insurance m_Insurance;
 
-    public InsuranceListImpl(){
-
+    public InsuranceListImpl() {
+        this.insuranceList = new ArrayList<>();
     }
 
-
-    public void add(){
-
+    @Override
+    public void add(Insurance insurance) {
+        insuranceList.add(insurance);
     }
 
-    public void delete(){
-
+    @Override
+    public void delete(String insuranceID) {
+        insuranceList.removeIf(insurance -> insurance.getInsuranceID().equals(insuranceID));
     }
 
-    public void getInsuranceByID(){
-
+    @Override
+    public Insurance getInsuranceByID(String insuranceID) {
+        for (Insurance insurance : insuranceList) {
+            if (insurance.getInsuranceID().equals(insuranceID)) {
+                return insurance;
+            }
+        }
+        return null;
     }
 
-    public void get(){
-
+    @Override
+    public List<Insurance> getListByUserId(String customerID) {
+        List<Insurance> customerInsurances = new ArrayList<>();
+        for (Insurance insurance : insuranceList) {
+            if (insurance.getCustomerIDs().contains(customerID)) {
+                customerInsurances.add(insurance);
+            }
+        }
+        return customerInsurances;
     }
 
-    public void update(){
-
+    @Override
+    public void update(Insurance insurance) {
+        for (int i = 0; i < insuranceList.size(); i++) {
+            if (insuranceList.get(i).getInsuranceID().equals(insurance.getInsuranceID())) {
+                insuranceList.set(i, insurance);
+                break;
+            }
+        }
     }
-
 }
