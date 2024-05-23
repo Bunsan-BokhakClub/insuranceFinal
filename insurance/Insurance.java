@@ -18,17 +18,32 @@ public class Insurance {
 
 
 	private List<String> customerIDs;
-	//어떤 고객이 든 보험을 조회 하려면 필요함.
-	// 한 보험에 대해 여러명의 유저가 가입할 수 있으니 list로 설정함.
 
-
-
-	public Insurance(String insuranceID, String insuranceName, int paymentAmount) {
+	public Insurance(String insuranceID, String insuranceName, int compensationAmount, String cycleType,
+					 int paymentAmount, int paymentCycle, int insurancePeriod) {
 		this.insuranceID = insuranceID;
+		this.compensationAmount = compensationAmount;
+		this.cycleType = cycleType;
 		this.insuranceName = insuranceName;
 		this.paymentAmount = paymentAmount;
-		this.customerIDs = new ArrayList<>();//처음 보험이 만들어 질 때는 유저가 없으니 빈 리스트
+		this.paymentCycle = Integer.toString(paymentCycle);
+		this.insurancePeriod = Integer.toString(insurancePeriod);
+		this.customerIDs = new ArrayList<>(); // 초기화
 	}
+
+	// 복사 생성자
+	public Insurance(Insurance insurance) {
+		this.insuranceID = insurance.insuranceID;
+		this.compensationAmount = insurance.compensationAmount;
+		this.cycleType = insurance.cycleType;
+		this.insuranceName = insurance.insuranceName;
+		this.paymentAmount = insurance.paymentAmount;
+		this.paymentCycle = insurance.paymentCycle;
+		this.insurancePeriod = insurance.insurancePeriod;
+		this.customerIDs = new ArrayList<>(insurance.customerIDs);
+	}
+
+
 
 	public String getInsuranceID() {
 		return insuranceID;
@@ -77,47 +92,6 @@ public class Insurance {
 	public void updatePaymentCycle(String paymentCycle) {
 		this.paymentCycle = paymentCycle;
 	}
-=======
-package insurance;
-
-public class Insurance {
-
-	private int compensationAmount;
-	private String cycleType;
-	private String insuranceName;
-	private String insuranceID;
-	private int paymentAmount;
-	private String paymentCycle;
-	private String insurancePeriod;
-
-// 	public Insurance(int insuranceID, String insuranceName, int compensationAmount, String cycleType,
-// 					 int paymentAmount, int paymentCycle, int insurancePeriod) {
-// 		this.insuranceID = Integer.toString(insuranceID);
-// 		this.compensationAmount = compensationAmount;
-// 		this.cycleType = cycleType;
-// 		this.insuranceName = insuranceName;
-// 		this.paymentAmount = paymentAmount;
-// 		this.paymentCycle = Integer.toString(paymentCycle);
-// 		this.insurancePeriod = Integer.toString(insurancePeriod);
-// 	}
-
-// 	public Insurance(Insurance insurance) {
-// 		this.insuranceID = insurance.getInsuranceID();
-// 		this.compensationAmount = insurance.getCompensationAmount();
-// 		this.cycleType = insurance.getCycleType();
-// 		this.insuranceName = insurance.getInsuranceName();
-// 		this.paymentAmount = insurance.getPaymentAmount();
-// 		this.paymentCycle = insurance.getPaymentCycle();
-// 		this.insurancePeriod = insurance.getInsurancePeriod();
-// 	}
-
-	public String getInsuranceName() {
-		return insuranceName;
-	}
-
-	public String getInsuranceID() {
-		return insuranceID;
-	}
 
 	public int getCompensationAmount() {
 		return compensationAmount;
@@ -127,9 +101,6 @@ public class Insurance {
 		return cycleType;
 	}
 
-	public int getPaymentAmount() {
-		return paymentAmount;
-	}
 
 	public String getPaymentCycle() {
 		return paymentCycle;
@@ -147,17 +118,6 @@ public class Insurance {
 		this.cycleType = cycleType;
 	}
 
-	public void setInsuranceName(String insuranceName) {
-		this.insuranceName = insuranceName;
-	}
-
-	public void setInsuranceID(String insuranceID) {
-		this.insuranceID = insuranceID;
-	}
-
-	public void setPaymentAmount(int paymentAmount) {
-		this.paymentAmount = paymentAmount;
-	}
 
 	public void setPaymentCycle(String paymentCycle) {
 		this.paymentCycle = paymentCycle;

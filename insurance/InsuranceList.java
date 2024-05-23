@@ -14,4 +14,5 @@ public interface InsuranceList {
 
 	void update(Insurance insurance);
 
+    Insurance getInsuranceByName(String insuranceName);
 }

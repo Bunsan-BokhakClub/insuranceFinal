@@ -9,4 +9,5 @@ public interface CustomerList {
 
 	public void update();
 
+	Customer getCustomerByID(String customerId);
 }

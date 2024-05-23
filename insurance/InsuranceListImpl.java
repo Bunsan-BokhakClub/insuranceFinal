@@ -8,8 +8,8 @@ public class InsuranceListImpl implements InsuranceList {
     private ArrayList<Insurance> insuranceList;
     public Insurance m_Insurance;
 
-    public InsuranceListImpl() {
-        this.insuranceList = new ArrayList<>();
+    public InsuranceListImpl(ArrayList<Insurance> insList) {
+        this.insuranceList = insList;
     }
 
     @Override
@@ -51,15 +51,12 @@ public class InsuranceListImpl implements InsuranceList {
                 break;
             }
         }
+    }
 
 //     public InsuranceListImpl(ArrayList<Insurance> insuranceList) {
 //         this.insuranceList = insuranceList;
 //     }
 
-
-    public ArrayList<Insurance> getInsuranceList() {
-        return insuranceList;
-    }
 
     public Insurance getInsuranceByName(String insName) {
         return insuranceList.stream()

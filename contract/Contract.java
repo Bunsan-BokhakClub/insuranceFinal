@@ -29,10 +29,10 @@ public class Contract {
 					String customerStatus, String cycleType, String email, String employeeID, String employeeName,
 					String gender, String insuranceID, String insuranceName, int paymentAmount, int paymentCycle,
 					String phoneNumber, CompensationClaim compensationClaim) {
+
 		this.address = address;
 		this.age = age;
 		this.birth = birth;
-
 		this.compensationAmount = compensationAmount;
 		this.concludeDate = concludeDate;
 		this.customerID = customerID;
@@ -90,6 +90,7 @@ public class Contract {
 
 	public void setConcludeDate(String concludeDate) {
 		this.concludeDate = concludeDate;
+	}
 	public int getPaymentAmount() {
 		return paymentAmount;
 	}
@@ -113,18 +114,13 @@ public class Contract {
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
-	public String getCustomerID() {
-		return customerID;
-	}
+	
 
 	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
 	}
 
-	public String getCustomerName() {
-		return customerName;
-	}
+
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
@@ -178,25 +174,16 @@ public class Contract {
 		this.gender = gender;
 	}
 
-	public String getInsuranceID() {
-		return insuranceID;
-	}
 
 	public void setInsuranceID(String insuranceID) {
 		this.insuranceID = insuranceID;
 	}
 
-	public String getInsuranceName() {
-		return insuranceName;
-	}
 
 	public void setInsuranceName(String insuranceName) {
 		this.insuranceName = insuranceName;
 	}
 
-	public int getPaymentAmount() {
-		return paymentAmount;
-	}
 
 	public void setPaymentAmount(int paymentAmount) {
 		this.paymentAmount = paymentAmount;
@@ -208,10 +195,6 @@ public class Contract {
 
 	public void setPaymentCycle(int paymentCycle) {
 		this.paymentCycle = paymentCycle;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
 	}
 
 	public void setPhoneNumber(String phoneNumber) {

@@ -1,4 +1,5 @@
 import customer.Customer;
+import customer.CustomerList;
 import customer.CustomerListImpl;
 import insurance.Insurance;
 import insurance.InsuranceApplication.InsuranceApplication;
@@ -23,7 +24,7 @@ import java.util.Arrays;
 
 
 
-  
+
 
 public class Main {
 
@@ -40,6 +41,8 @@ public class Main {
     private static CompensationClaimListImpl compensationClaimList;
     private static InsuranceListImpl insuranceList;
     private static PaymentListImpl paymentList;
+    private static CustomerList customerList;
+    private  static InsuranceList insuranceListImpl;
 
 
     public static void main(String[] args) throws IOException {
@@ -353,7 +356,7 @@ public class Main {
         System.out.print("보험 기간: ");
         int insurancePeriod = Integer.parseInt(br.readLine().trim());
 
-        Insurance insurance = new Insurance(insuranceIndex++, insuranceName, compensationAmount, renewalStatus,
+        Insurance insurance = new Insurance(String.valueOf(insuranceIndex++), insuranceName, compensationAmount, renewalStatus,
                 insurancePremium, renewalCycle, insurancePeriod);
 
         switch (insuranceType) {

@@ -129,9 +129,6 @@ public class Customer {
 	public void setPersonalHistory(PersonalHistory personalHistory) {
 		this.personalHistory = personalHistory;
 	}
-	public String getCustomerID(){
-		return customerID;
-	}
 
 	public String getCustomerName(){
 		return name;
