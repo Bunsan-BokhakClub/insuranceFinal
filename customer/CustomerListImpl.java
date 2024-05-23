@@ -12,25 +12,27 @@ public class CustomerListImpl implements CustomerList {
 
 	}
 
-	public void add(Customer Customer){
-
+	public void add(Customer customer){
+		customerList.add(customer);
 	}
 
-	public void delete(String CustomerID){
-
+	public void delete(String customerID){
+		customerList.removeIf(customer -> customer.getCustomerID().equals(customerID));
 	}
 
-	public void getCustomerByID(int CustomerID){
-
+	public Customer getCustomerByID(String customerID) {
+		for (Customer customer : customerList) {
+			if (customer.getCustomerID().equals(customerID)) {
+				return customer;
+			}
+		}
+		return null;
 	}
 
-	public void add(){
 
-	}
 
-	public void delete(){
 
-	}
+
 
 	public void get(){
 
