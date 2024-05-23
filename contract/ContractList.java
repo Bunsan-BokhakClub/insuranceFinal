@@ -1,11 +1,9 @@
 package contract;
 
 public interface ContractList {
-    public void add();
 
-    public void delete();
+    void add(Contract contract);
 
-    public void get();
+    Contract getContractByNameAndPN(String cusName, String pN);
 
-    public void update();
 }

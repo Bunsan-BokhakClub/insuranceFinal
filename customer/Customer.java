@@ -129,4 +129,33 @@ public class Customer {
 	public void setPersonalHistory(PersonalHistory personalHistory) {
 		this.personalHistory = personalHistory;
 	}
+	public String getCustomerID(){
+		return customerID;
+	}
+
+	public String getCustomerName(){
+		return name;
+	}
+
+	public String getCustomerPhoneNumber(){
+		return phoneNumber;
+	}
+
+	public void updateAddress(String address) {
+		this.address = address;
+	}
+
+	public void updateCustomerName(String name) {
+		this.name = name;
+	}
+
+	public void updateEmail(String email) {
+		this.email = email;
+	}
+
+	public void updatePhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
 }

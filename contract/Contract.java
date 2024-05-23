@@ -19,18 +19,21 @@ public class Contract {
 	private String gender;
 	private String insuranceID;
 	private String insuranceName;
+
 	private int paymentAmount;
 	private int paymentCycle;
 	private String phoneNumber;
 	public CompensationClaim compensationClaim;
 
-	public Contract(String address, int age, String birth, String concludeDate, String customerID, String customerName,
+	public Contract(String address, int age, String birth, int compensationAmount, String concludeDate, String customerID, String customerName,
 					String customerStatus, String cycleType, String email, String employeeID, String employeeName,
 					String gender, String insuranceID, String insuranceName, int paymentAmount, int paymentCycle,
 					String phoneNumber, CompensationClaim compensationClaim) {
 		this.address = address;
 		this.age = age;
 		this.birth = birth;
+
+		this.compensationAmount = compensationAmount;
 		this.concludeDate = concludeDate;
 		this.customerID = customerID;
 		this.customerName = customerName;
@@ -87,6 +90,28 @@ public class Contract {
 
 	public void setConcludeDate(String concludeDate) {
 		this.concludeDate = concludeDate;
+	public int getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	public String getInsuranceName() {
+		return insuranceName;
+	}
+
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public String getInsuranceID() {
+		return insuranceID;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
 	public String getCustomerID() {

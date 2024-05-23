@@ -13,4 +13,5 @@ public interface InsuranceList {
 	List<Insurance> getListByUserId(String customerID);
 
 	void update(Insurance insurance);
+
 }
