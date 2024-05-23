@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class EmployeeListImpl implements EmployeeList {
 
 	private ArrayList<Employee> employeeList;
-	public Employee employee;
 
 	public EmployeeListImpl(){
 

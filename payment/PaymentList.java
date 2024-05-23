@@ -1,13 +1,15 @@
 package payment;
 
+import java.util.List;
+
 public interface PaymentList {
 
-	public void add();
+	void add(Payment payment);
 
-	public void delete();
+	void delete();
 
-	public void get();
+	List<Payment> getPaymentListByCustomerID(String customerID);
 
-	public void update();
+	void update();
 
 }

@@ -4,26 +4,22 @@ import partner.Partner;
 
 public class Servey {
 
-	private int customerID;
-	private int insuranceID;
-	private int managerName;
+	private String claimantName;
+	private String bank;
+	private String accountNumber;
+	private String accountHolder;
 	private int serveyAmount;
 	public Partner partner;
 
-	public Servey(){
+	public Servey(String claimantName, String bank,
+				  String accountNumber, String accountHolder, int serveyAmount, Partner partner) {
 
-	}
-
-	public String getManagerName(){
-		return "";
-	}
-
-	public String getServeyAmount(){
-		return "";
-	}
-
-	public void updateServeyAmount(){
-
+		this.claimantName = claimantName;
+		this.bank = bank;
+		this.accountNumber = accountNumber;
+		this.accountHolder = accountHolder;
+		this.serveyAmount = serveyAmount;
+		this.partner = partner;
 	}
 
 }

@@ -5,31 +5,25 @@ import java.util.ArrayList;
 public class InsuranceListImpl implements InsuranceList {
 
     private ArrayList<Insurance> insuranceList;
-    public Insurance m_Insurance;
 
-    public InsuranceListImpl(){
-
+    public InsuranceListImpl(ArrayList<Insurance> insuranceList) {
+        this.insuranceList = insuranceList;
     }
 
-
-    public void add(){
-
+    @Override
+    public void add(Insurance insurance){
+        insuranceList.add(insurance);
     }
 
-    public void delete(){
-
+    public ArrayList<Insurance> getInsuranceList() {
+        return insuranceList;
     }
 
-    public void getInsuranceByID(){
-
-    }
-
-    public void get(){
-
-    }
-
-    public void update(){
-
+    public Insurance getInsuranceByName(String insName) {
+        return insuranceList.stream()
+                .filter(insurance -> insurance.getInsuranceName().equals(insName))
+                .findFirst()
+                .orElse(null);
     }
 
 }

@@ -2,12 +2,12 @@ package compensation;
 
 public interface CompensationClaimList {
 
-	public void add();
+	void add(CompensationClaim compensationClaim);
 
-	public void delete();
+	void delete();
 
-	public void get();
+	void get();
 
-	public void update();
+	void update();
 
 }

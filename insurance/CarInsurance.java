@@ -6,7 +6,10 @@ public class CarInsurance extends Insurance {
 	private String model;
 	private String year;
 
-	public CarInsurance(){
-
+	public CarInsurance(Insurance insurance, int distance, String model, String year) {
+		super(insurance);
+		this.distance = distance;
+		this.model = model;
+		this.year = year;
 	}
 }

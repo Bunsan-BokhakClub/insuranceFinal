@@ -1,23 +1,31 @@
 package payment;
 
+import java.time.LocalDateTime;
+
 public class Payment {
 
 	private String customerID;
 	private String insuranceID;
 	private int paymentAmount;
-	private int paymentDate;
+	private String paymentDate;
+	private String bank;
+	private String accountNumber;
+	private String accountHolder;
 	private boolean whetherPayment;
 
-	public Payment(){
-
+	public Payment(String customerID, String insuranceID, int paymentAmount,
+				   String bank, String accountNumber, String accountHolder) {
+		this.accountHolder = accountHolder;
+		this.bank = bank;
+		this.accountNumber = accountNumber;
+		this.customerID = customerID;
+		this.insuranceID = insuranceID;
+		this.paymentAmount = paymentAmount;
+		this.paymentDate = LocalDateTime.now().toString();
+		this.whetherPayment = true;
 	}
 
-	public Payment getPayment(){
-		return null;
+	public String  getCustomerID() {
+		return customerID;
 	}
-
-	public void updateWhetherPayment(){
-
-	}
-
 }
