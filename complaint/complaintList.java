@@ -2,7 +2,7 @@ package complaint;
 
 public interface complaintList {
 
-	public void add();
+	public void add(Complaint complaint);
 
 	public void delete();
 

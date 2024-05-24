@@ -31,11 +31,20 @@ public class ContractListImpl implements ContractList {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+
     public Contract getContractByInsName(String insName) {
         return contractList.stream()
                 .filter(contract -> contract.getInsuranceName().equals(insName))
                 .findFirst()
                 .orElse(null);
 
+    }
+    public Contract getContractByID(int id) {
+        for (Contract contract : contractList) {
+            if (contract.getContractID() == id) {
+                return contract;
+            }
+        }
+        return null;
     }
 }

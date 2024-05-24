@@ -4,23 +4,22 @@ import java.util.ArrayList;
 
 public class CompensationClaimListImpl implements CompensationClaimList {
 
-	private ArrayList<CompensationClaim> compensationList;
+	private ArrayList<CompensationClaim> compensationClaimList;
 
-	public CompensationClaimListImpl(ArrayList<CompensationClaim> compensationList) {
-		this.compensationList = compensationList;
+	public CompensationClaimListImpl(ArrayList<CompensationClaim> compensationClaimList){
+		this.compensationClaimList = compensationClaimList;
 	}
 
 
 	public void add(CompensationClaim compensationClaim){
-		compensationList.add(compensationClaim);
+		compensationClaimList.add(compensationClaim);
 	}
-
 	public void delete(){
 
 	}
 
-	public void get(){
-
+	public ArrayList<CompensationClaim> get() {
+		return compensationClaimList;
 	}
 
 	public void update(){

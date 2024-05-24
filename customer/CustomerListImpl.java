@@ -9,7 +9,7 @@ public class CustomerListImpl implements CustomerList {
 	public Customer m_Customer;
 
 	public CustomerListImpl(){
-
+		customerList = new ArrayList<Customer>();
 	}
 
 	public void add(Customer customer){

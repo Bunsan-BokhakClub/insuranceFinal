@@ -1,13 +1,15 @@
 package compensation;
 
+import java.util.ArrayList;
+
 public interface CompensationClaimList {
 
 	void add(CompensationClaim compensationClaim);
 
-	void delete();
+	public void delete();
 
-	void get();
+	public ArrayList<CompensationClaim> get();
 
-	void update();
+	public void update();
 
 }

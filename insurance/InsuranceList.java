@@ -1,5 +1,6 @@
 package insurance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface InsuranceList {
@@ -15,4 +16,7 @@ public interface InsuranceList {
 	void update(Insurance insurance);
 
     Insurance getInsuranceByName(String insuranceName);
+
+	public ArrayList<Insurance> get();
+
 }

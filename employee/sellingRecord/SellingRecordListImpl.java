@@ -8,8 +8,8 @@ public class SellingRecordListImpl implements SellingRecordList{
     public SellingRecord sellingRecord;
 
     @Override
-    public void add() {
-
+    public void add(SellingRecord sellingRecord) {
+        sellingRecordsList.add(sellingRecord);
     }
 
     @Override
@@ -18,8 +18,8 @@ public class SellingRecordListImpl implements SellingRecordList{
     }
 
     @Override
-    public void get() {
-
+    public ArrayList<SellingRecord> get() {
+        return sellingRecordsList;
     }
 
     @Override

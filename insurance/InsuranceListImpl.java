@@ -64,4 +64,8 @@ public class InsuranceListImpl implements InsuranceList {
                 .findFirst()
                 .orElse(null);
     }
+
+    public ArrayList<Insurance> get(){
+        return insuranceList;
+    }
 }

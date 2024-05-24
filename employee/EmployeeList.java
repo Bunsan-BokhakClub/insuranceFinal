@@ -1,13 +1,15 @@
 package employee;
 
+import java.util.ArrayList;
+
 public interface EmployeeList {
 
-	void add();
+	public void add();
 
-	void delete();
+	public void delete();
 
-	void get();
+	public ArrayList<Employee> get();
 
-	void update();
+	public void update();
 
 }

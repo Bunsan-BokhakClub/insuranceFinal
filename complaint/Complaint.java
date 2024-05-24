@@ -5,8 +5,9 @@ public class Complaint {
 	private String content;
 	private String customerID;
 
-	public Complaint(){
-
+	public Complaint(String customerID, String content){
+		this.customerID = customerID;
+		this.content = content;
 	}
 
 	public String getContent(){

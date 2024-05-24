@@ -3,15 +3,30 @@ package employee.sellingRecord;
 public class SellingRecord {
 
 	private String conncludeDate;
+	private String contractDate;
 	private String customerID;
 	private String insuranceID;
 
-	public SellingRecord(){
-
+	public SellingRecord(String customerID, String insuranceID, String contractDate){
+		this.customerID = customerID;
+		this.insuranceID = insuranceID;
+		this.contractDate = contractDate;
 	}
 
-	public SellingRecord getSellingRecord(){
-		return null;
+	public String getConncludeDate() {
+		return conncludeDate;
+	}
+
+	public String getContractDate() {
+		return contractDate;
+	}
+
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public String getInsuranceID() {
+		return insuranceID;
 	}
 
 }

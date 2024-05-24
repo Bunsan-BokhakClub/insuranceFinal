@@ -4,6 +4,9 @@ import compensation.CompensationClaim;
 
 public class Contract {
 
+
+
+	private int contractID;
 	private String address;
 	private int age;
 	private String birth;
@@ -207,6 +210,13 @@ public class Contract {
 
 	public void setCompensationClaim(CompensationClaim compensationClaim) {
 		this.compensationClaim = compensationClaim;
+	}
+	public int getContractID() {
+		return contractID;
+	}
+
+	public void setContractID(int contractID) {
+		this.contractID = contractID;
 	}
 
 	//********************* Getter 및 Setter 메서드************************
