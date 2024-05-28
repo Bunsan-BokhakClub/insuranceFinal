@@ -1,6 +1,6 @@
 package insurance.InsuranceApplication;
 
-public class InsuranceApplication {
+public class InsuranceApplication { //보험 신청 임시 저장소
     private String applicationId;
     private String customerId;
     private String insuranceId;

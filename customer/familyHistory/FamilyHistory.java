@@ -1,12 +1,15 @@
-package customer;
+package customer.familyHistory;
 
 public class FamilyHistory {
+
+
 
 	private String diseaseName;
 	private String relationship;
 
-	public FamilyHistory(){
-
+	public FamilyHistory(String diseaseName, String relationship) {
+		this.diseaseName = diseaseName;
+		this.relationship = relationship;
 	}
 
 	public String getDiseaseName(){

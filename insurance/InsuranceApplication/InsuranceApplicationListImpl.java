@@ -3,7 +3,7 @@ package insurance.InsuranceApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsuranceApplicationListImpl {
+public class InsuranceApplicationListImpl { //이름 변경 (3개 다)
     private List<InsuranceApplication> insuranceApplications;
 
     public InsuranceApplicationListImpl() {

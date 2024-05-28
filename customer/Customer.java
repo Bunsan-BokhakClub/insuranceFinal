@@ -2,6 +2,10 @@ package customer;
 
 import complaint.ComplaintListImpl;
 import contract.Contract;
+import customer.familyHistory.FamilyHistory;
+import customer.familyHistory.FamilyHistoryImpl;
+import customer.personalHistory.PersonalHistory;
+import customer.personalHistory.PersonalHistoryImpl;
 
 public class Customer {
 
@@ -12,25 +16,27 @@ public class Customer {
 	private String email;
 	private String gender;
 	private String name;
+	private String job;
 	private String phoneNumber;
 	public ComplaintListImpl complaintListImpl;
-	public FamilyHistory familyHistory;
-	public Contract contract;
-	public PersonalHistory personalHistory;
+	public FamilyHistoryImpl familyHistoryList;
+	public PersonalHistoryImpl personalHistoryList;
 
-	public Customer(String address, int age, String birth, String customerID, String email, String gender, String name, String phoneNumber, ComplaintListImpl complaintListImpl, FamilyHistory familyHistory, Contract contract, PersonalHistory personalHistory) {
-		this.address = address;
-		this.age = age;
-		this.birth = birth;
+	public Customer(String name, String gender, String birth,
+					String phoneNumber, String email, String address, String job,
+					FamilyHistoryImpl familyHistoryList, PersonalHistoryImpl personalHistoryList) {
 		this.customerID = customerID;
-		this.email = email;
-		this.gender = gender;
 		this.name = name;
+		this.gender = gender;
+		this.email = email;
+		this.birth = birth;
 		this.phoneNumber = phoneNumber;
-		this.complaintListImpl = complaintListImpl;
-		this.familyHistory = familyHistory;
-		this.contract = contract;
-		this.personalHistory = personalHistory;
+		this.address = address;
+		this.job = job;
+		this.familyHistoryList = familyHistoryList;
+		this.personalHistoryList = personalHistoryList;
+
+		this.complaintListImpl = new ComplaintListImpl();
 	}
 
 
@@ -106,28 +112,20 @@ public class Customer {
 		this.complaintListImpl = complaintListImpl;
 	}
 
-	public FamilyHistory getFamilyHistory() {
-		return familyHistory;
+	public FamilyHistoryImpl getFamilyHistoryList() {
+		return familyHistoryList;
 	}
 
-	public void setFamilyHistory(FamilyHistory familyHistory) {
-		this.familyHistory = familyHistory;
+	public void setFamilyHistoryList(FamilyHistoryImpl familyHistoryList) {
+		this.familyHistoryList = familyHistoryList;
 	}
 
-	public Contract getContract() {
-		return contract;
+	public PersonalHistoryImpl getPersonalHistoryList() {
+		return personalHistoryList;
 	}
 
-	public void setContract(Contract contract) {
-		this.contract = contract;
-	}
-
-	public PersonalHistory getPersonalHistory() {
-		return personalHistory;
-	}
-
-	public void setPersonalHistory(PersonalHistory personalHistory) {
-		this.personalHistory = personalHistory;
+	public void setPersonalHistoryList(PersonalHistoryImpl personalHistoryList) {
+		this.personalHistoryList = personalHistoryList;
 	}
 
 	public String getCustomerName(){

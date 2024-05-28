@@ -1,12 +1,9 @@
 package customer;
-
-
 import java.util.ArrayList;
 
 public class CustomerListImpl implements CustomerList {
 
 	private ArrayList<Customer> customerList;
-	public Customer m_Customer;
 
 	public CustomerListImpl(){
 		customerList = new ArrayList<Customer>();
@@ -29,13 +26,19 @@ public class CustomerListImpl implements CustomerList {
 		return null;
 	}
 
+	@Override
+	public Customer getCustomerByPhoneNumber(String phoneNumber) {
+		for (Customer customer : customerList) {
+			if (customer.getPhoneNumber().equals(phoneNumber)) {
+				return customer;
+			}
+		}
+		return null;
+	}
 
 
-
-
-
-	public void get(){
-
+	public ArrayList<Customer> get(){
+		return customerList;
 	}
 
 	public void update(){
