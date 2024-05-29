@@ -22,7 +22,23 @@ public class Customer {
 	public FamilyHistoryImpl familyHistoryList;
 	public PersonalHistoryImpl personalHistoryList;
 
-	public Customer(String name, String gender, String birth,
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"customerID='" + customerID + '\'' +
+				", name='" + name + '\'' +
+				", gender='" + gender + '\'' +
+				", birth='" + birth + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", email='" + email + '\'' +
+				", address='" + address + '\'' +
+				", job='" + job + '\'' +
+				", familyHistoryList=" + familyHistoryList +
+				", personalHistoryList=" + personalHistoryList +
+				'}';
+	}
+
+	public Customer(String customerID, String name, String gender, String birth,
 					String phoneNumber, String email, String address, String job,
 					FamilyHistoryImpl familyHistoryList, PersonalHistoryImpl personalHistoryList) {
 		this.customerID = customerID;
@@ -78,6 +94,14 @@ public class Customer {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	public String getGender() {

@@ -37,7 +37,6 @@ public class Main {
 
     private static int insuranceIndex = 1;
     private static int insuranceApplicationIndex = 1;
-v
     private static List<Contract> contracts = new ArrayList<>();
     //그니까 이걸 왜 리스트로 따로 만든거?
     private static InsuranceApplicationListImpl insuranceApplicationList; // 보험 가입 신청 내역을 저장하는 리스트
@@ -230,42 +229,20 @@ v
             userChoice = br.readLine().trim();
 
             if (!userChoice.equals("x")){
-                seletedInsurance = insuranceList.getInsuranceByID(userChoice);
-                if (seletedInsurance != null){
-                    System.out.println("이름을 입력하세요: ");
-                    String userInput = br.readLine().trim();
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("성별을 입력하세요: ");
-                    userInput = br.readLine().trim();
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("생년월일을 입력하세요: ");
-                    userInput = br.readLine().trim();
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("전화번호를 입력하세요: ");
-                    userInput = br.readLine().trim();
-                    String phoneNumber = userInput;
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("주소을 입력하세요: ");
-                    userInput = br.readLine().trim();
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("직업을 입력하세요: ");
-                    userInput = br.readLine().trim();
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("가족력을 입력하세요: ");
-                    userInput = br.readLine().trim();
-                    while(userInput.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userInput = br.readLine().trim();}
-                    System.out.println("신청이 완료되었습니다.");
-
-                    Customer customer = customerList.getCustomerByPhoneNumber(phoneNumber);
+                System.out.println("ID를 입력해주세요 : ");
+                String id = br.readLine().trim();
+                Customer customer = customerList.getCustomerByID(id);
+                if (customer == null) System.out.println("해당 정보가 존재하지 않습니다");
+                else { //신청 완료된 경우
                     InsuranceApplication insuranceApplication = new InsuranceApplication(Integer.toString(insuranceApplicationIndex++), customer.getCustomerID() ,seletedInsurance.getInsuranceID(), false);
                     insuranceApplicationList.add(insuranceApplication);
-                } else {
-                    System.out.println("입력하신 보험은 존재하지 않습니다.");
+                    System.out.println("신청이 완료되었습니다.");
                 }
             }
-        } else {
+        }else {
             System.out.println("입력하신 보험은 존재하지 않습니다.");
         }
+
     }
 
     public static void checkMyInsurance() throws IOException {
@@ -664,18 +641,18 @@ v
 
     public static void queryCustomerInfo() throws IOException{
         System.out.println("고객 정보 조회를 처리합니다.");
-        System.out.println("1. 고객 정보 등록");
-        System.out.println("2. 고객 정보 조회");
+        System.out.println("1. 고객 정보 조회");
+        System.out.println("2. 고객 정보 등록");
         System.out.println("3. 고객 정보 수정");
         System.out.print("메뉴를 선택하세요: ");
         int choice = Integer.parseInt(br.readLine().trim());
 
         switch (choice) {
             case 1:
-                registerCustomerInfo();
+                viewCustomerInfo();
                 break;
             case 2:
-                viewCustomerInfo();
+                registerCustomerInfo();
                 break;
             case 3:
                 modifyCustomerInfo();
@@ -692,6 +669,8 @@ v
         PersonalHistoryImpl personalHistoryList = new PersonalHistoryImpl();
 
         System.out.println("고객 정보를 등록합니다.");
+        System.out.print("아이디: ");
+        String id = br.readLine().trim();
         System.out.print("이름: ");
         String name = br.readLine().trim();
         System.out.print("성별: ");
@@ -731,7 +710,7 @@ v
         }
 
 
-        Customer newCustomer = new Customer(name, gender, birth, phoneNumber, email,
+        Customer newCustomer = new Customer(id, name, gender, birth, phoneNumber, email,
                 address, job, familyHistoryList, personalHistoryList);
         customerList.add(newCustomer);
         System.out.println("고객 정보가 등록되었습니다.");
@@ -743,16 +722,29 @@ v
         String customerId = br.readLine().trim();
         Customer customer = customerList.getCustomerByID(customerId);
         if (customer != null) {
-            System.out.print("새 주소: ");
-            String address = br.readLine().trim();
-            System.out.print("새 이메일: ");
-            String email = br.readLine().trim();
-            System.out.print("새 전화번호: ");
+            System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
+            System.out.print("이름 (" + customer.getName() + "): ");
+            String name = br.readLine().trim();
+            if (!name.isEmpty()) customer.setName(name);
+            System.out.print("성별 (" + customer.getGender() + "): ");
+            String gender = br.readLine().trim();
+            if (!gender.isEmpty()) customer.setGender(gender);
+            System.out.print("생년월일 (" + customer.getBirth() + "): ");
+            String birth = br.readLine().trim();
+            if (!birth.isEmpty()) customer.setBirth(birth);
+            System.out.print("전화번호 (" + customer.getPhoneNumber() + "): ");
             String phoneNumber = br.readLine().trim();
-            customer.setAddress(address);
-            customer.setEmail(email);
-            customer.setPhoneNumber(phoneNumber);
-            System.out.println("고객 정보가 수정되었습니다.");
+            if (!phoneNumber.isEmpty()) customer.setPhoneNumber(phoneNumber);
+            System.out.print("이메일 (" + customer.getEmail() + "): ");
+            String email = br.readLine().trim();
+            if (!email.isEmpty()) customer.setEmail(email);
+            System.out.print("주소 (" + customer.getAddress() + "): ");
+            String address = br.readLine().trim();
+            if (!address.isEmpty()) customer.setAddress(address);
+            System.out.print("직업 (" + customer.getJob() + "): ");
+            String job = br.readLine().trim();
+            if (!job.isEmpty()) customer.setJob(job);
+            System.out.println("수정이 완료되었습니다.");
         } else {
             System.out.println("일치하는 고객 정보가 없습니다.");
         }
@@ -765,11 +757,8 @@ v
         System.out.print("조회할 고객 ID를 입력해주세요: ");
         String customerId = br.readLine().trim();
         Customer customer = customerList.getCustomerByID(customerId);
-        if (customer != null) {
-            System.out.println("고객 ID: " + customer.getCustomerID() + ", 이름: " + customer.getName() +  ", 전화번호: " + customer.getPhoneNumber());
-        } else {
-            System.out.println("일치하는 고객 정보가 없습니다.");
-        }
+        if (customer != null) customer.toString();
+        else System.out.println("일치하는 고객 정보가 없습니다.");
     }
     //---------------queryCustomerInfo 내부 함수들 끝----------------
 
@@ -920,7 +909,7 @@ v
     //--------------------------queryInsuranceApplication 내부 함수들 ------------------
     public static void approveInsuranceApplication() throws IOException {
         System.out.println("보험 가입 신청을 승인합니다.");
-        System.out.println(insuranceApplications.get(0).getApplicationId());
+        System.out.println(insuranceApplicationList.get(0).getApplicationId());
         System.out.print("승인할 신청 ID: ");
         String applicationId = br.readLine().trim();
         //여기서 InsuranceApplication 는 2번의 결과로 유저가 보험 신청을 한 내용들임
@@ -936,7 +925,7 @@ v
 
     }
     private static InsuranceApplication getInsuranceApplicationById(String applicationId) {
-        for (InsuranceApplication application : insuranceApplications) {
+        for (InsuranceApplication application : insuranceApplicationList.get(0).getApplicationId()) {
             if (application.getApplicationId().equals(applicationId)) {
                 return application;
             }
