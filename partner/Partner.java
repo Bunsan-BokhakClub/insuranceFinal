@@ -1,19 +1,28 @@
 package partner;
 
+import partner.rate.RateListImpl;
+
 public class Partner {
 
 	private int partnerID;
 	private String partnerName;
-	private int partnerRate;
 	private String partnerType;
 	private String partnerAddress;
-	private String partnerContactInformation;
+	private String partnerPhoneNumber;
+
+	public RateListImpl getRateList() {
+		return rateList;
+	}
+
+	private RateListImpl rateList;
 
 	public Partner(String partnerName, String partnerType, String partnerAddress, String partnerContactInformation) {
 		this.partnerName = partnerName;
 		this.partnerType = partnerType;
 		this.partnerAddress = partnerAddress;
-		this.partnerContactInformation = partnerContactInformation;
+		this.partnerPhoneNumber = partnerContactInformation;
+
+		this.rateList = new RateListImpl();
 	}
 
 	public int getPartnerID() {
@@ -24,14 +33,6 @@ public class Partner {
 		return partnerName;
 	}
 
-	public int getPartnerRate() {
-		return partnerRate;
-	}
-
-	public void setPartnerRate(int partnerRate) {
-		this.partnerRate = partnerRate;
-	}
-
 	public String getPartnerType() {
 		return partnerType;
 	}
@@ -40,7 +41,7 @@ public class Partner {
 		return partnerAddress;
 	}
 
-	public String getPartnerContactInformation() {
-		return partnerContactInformation;
+	public String getPartnerPhoneNumber() {
+		return partnerPhoneNumber;
 	}
 }

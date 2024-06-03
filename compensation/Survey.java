@@ -4,14 +4,14 @@ import partner.Partner;
 
 public class Survey {
 
-	private int customerID;
-	private int insuranceID;
+	private String customerID;
+	private String insuranceID;
 	private String managerName;
 	private int surveyAmount;
 	private String reason;
 	public Partner partner;
 
-	public Survey(int customerID, int insuranceID, String managerName, int surveyAmount , String reason) {
+	public Survey(String customerID, String insuranceID, String managerName, int surveyAmount , String reason) {
 		this.customerID = customerID;
 		this.insuranceID = insuranceID;
 		this.managerName = managerName;
@@ -19,11 +19,11 @@ public class Survey {
 		this.reason = reason;
 	}
 
-	public int getCustomerID() {
+	public String getCustomerID() {
 		return customerID;
 	}
 
-	public int getInsuranceID() {
+	public String getInsuranceID() {
 		return insuranceID;
 	}
 

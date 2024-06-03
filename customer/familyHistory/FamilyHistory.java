@@ -13,11 +13,11 @@ public class FamilyHistory {
 	}
 
 	public String getDiseaseName(){
-		return "";
+		return diseaseName;
 	}
 
-	public String getOccurDate(){
-		return "";
+	public String getRelationship(){
+		return relationship;
 	}
 
 }

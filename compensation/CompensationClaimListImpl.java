@@ -1,5 +1,7 @@
 package compensation;
 
+import contract.Contract;
+
 import java.util.ArrayList;
 
 public class CompensationClaimListImpl implements CompensationClaimList {
@@ -26,4 +28,11 @@ public class CompensationClaimListImpl implements CompensationClaimList {
 
 	}
 
+    public CompensationClaim getCompensationSlaimByID(String id) {
+		for (CompensationClaim compensationClaim : compensationClaimList) {
+			if (compensationClaim.getContractID().equals(id)) {
+				return compensationClaim;
+			}
+		}
+		return null;    }
 }

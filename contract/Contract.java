@@ -3,7 +3,11 @@ package contract;
 import compensation.CompensationClaim;
 import compensation.CompensationClaimList;
 import compensation.CompensationClaimListImpl;
+import payment.PaymentListImpl;
 
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Contract {
@@ -28,16 +32,16 @@ public class Contract {
 	private boolean contractStatus;
 	private boolean isPayment;
 
-	private int cancelMoney;
-
-
-
-
 	private String contractID;
 	private int age;
 	private String concludeDate;
 
 	private String email;
+
+
+	private String endDate;
+
+	private PaymentListImpl paymentList;
 
 
 
@@ -70,7 +74,8 @@ public class Contract {
 
 		this.compensationClaimList = new CompensationClaimListImpl();
 		this.contractID = customerID + insuranceID;
-		this.cancelMoney = 0;
+		this.endDate = addYearsToDate();
+		this.paymentList = new PaymentListImpl();
 	}
 
 	@Override
@@ -96,6 +101,8 @@ public class Contract {
 	}
 
 	private static double calculateRefund() {
+
+//		String endDate = concludeDate
 		// 환급금 계산 로직 (예시)
 		// 실제 로직은 보험사의 환급 정책에 따라 다를 수 있음
 		double totalPaidAmount = 1000000; // 총 납부 금액 (예시)
@@ -103,14 +110,30 @@ public class Contract {
 		return totalPaidAmount * refundRate;
 	}
 
-	//********************* Getter 및 Setter 메서드************************
-	public int getCancelMoney() {
-		return cancelMoney;
+	public String addYearsToDate() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime dateTime = LocalDateTime.parse(this.concludeDate, formatter);
+		LocalDateTime newDateTime = dateTime.plusYears(Integer.parseInt(this.insurancePeriod));
+		return newDateTime.format(formatter);
 	}
 
-	public void setCancelMoney(int cancelMoney) {
-		this.cancelMoney = cancelMoney;
+	public double carculateCancelMoney(){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime endDateTime = LocalDateTime.parse(this.endDate, formatter);
+
+		Period endPeriod = Period.between(now.toLocalDate(), endDateTime.toLocalDate());
+		int endTotalMonths = endPeriod.getYears() * 12 + endPeriod.getMonths();
+		if (endTotalMonths > 12) {
+			return this.paymentAmount * 0.6;
+		} else if (endTotalMonths > 0) {
+			return this.paymentAmount * 0.4;
+		} else {
+			return 0; // 만기일이 지났거나 오늘인 경우 환급금 없음
+		}
 	}
+
+	//********************* Getter 및 Setter 메서드************************
 	public String getAddress() {
 		return address;
 	}
@@ -159,6 +182,13 @@ public class Contract {
 
 	public String getInsuranceName() {
 		return insuranceName;
+	}
+	public PaymentListImpl getPaymentList() {
+		return paymentList;
+	}
+
+	public void setPaymentList(PaymentListImpl paymentList) {
+		this.paymentList = paymentList;
 	}
 
 	public String getCustomerID() {
@@ -246,6 +276,14 @@ public class Contract {
 
 	public void setContractID(String contractID) {
 		this.contractID = contractID;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	//********************* Getter 및 Setter 메서드************************

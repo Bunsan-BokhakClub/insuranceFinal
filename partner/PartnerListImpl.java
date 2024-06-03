@@ -7,8 +7,8 @@ public class PartnerListImpl implements PartnerList {
 	private ArrayList<Partner> partnerList;
 	public Partner partner;
 
-	public PartnerListImpl(ArrayList<Partner> partnerList) {
-		this.partnerList = partnerList;
+	public PartnerListImpl() {
+		this.partnerList = new ArrayList<Partner>();
 	}
 
 	public void add(Partner partner){

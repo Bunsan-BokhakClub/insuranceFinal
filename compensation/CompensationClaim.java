@@ -8,18 +8,19 @@ public class CompensationClaim {
 	private String documentFile;
 	private String insuranceID;
 	private String insuranceName;
-	private int contractID;
+	private String contractID;
 	public Survey survey;
 
 	public CompensationClaim(String customerID, String customerName, String documentFile,
-							 String insuranceID, String insuranceName, Survey survey) {
+							 String insuranceID, String insuranceName) {
 		this.customerID = customerID;
 		this.customerName = customerName;
 		this.documentFile = documentFile;
 		this.insuranceID = insuranceID;
 		this.insuranceName = insuranceName;
-		this.survey = survey;
+		this.survey = null;
 		this.compensationClaimAmount = 0;
+		this.contractID = customerID + insuranceID;
 	}
 
 	public int getCompensationClaimAmount() {
@@ -46,7 +47,7 @@ public class CompensationClaim {
 		return insuranceName;
 	}
 
-	public int getContractID() {
+	public String getContractID() {
 		return contractID;
 	}
 

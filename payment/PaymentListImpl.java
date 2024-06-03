@@ -8,8 +8,8 @@ public class PaymentListImpl implements PaymentList {
 
 	private ArrayList<Payment> paymentList;
 
-	public PaymentListImpl(ArrayList<Payment> paymentList) {
-		this.paymentList = paymentList;
+	public PaymentListImpl() {
+		this.paymentList = new ArrayList<Payment>();
 	}
 
 	@Override
