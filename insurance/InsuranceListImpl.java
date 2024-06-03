@@ -6,10 +6,9 @@ import java.util.List;
 public class InsuranceListImpl implements InsuranceList {
 
     private ArrayList<Insurance> insuranceList;
-    public Insurance m_Insurance;
 
-    public InsuranceListImpl(ArrayList<Insurance> insList) {
-        this.insuranceList = insList;
+    public InsuranceListImpl() {
+        this.insuranceList = new ArrayList<Insurance>();
     }
 
     @Override

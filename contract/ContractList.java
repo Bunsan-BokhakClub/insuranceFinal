@@ -6,7 +6,7 @@ public interface ContractList {
 
     Contract getContractByNameAndPN(String cusName, String pN);
 
-    Contract getContractByID(int id);
+    Contract getContractByID(String id);
 
 
     }

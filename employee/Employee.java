@@ -2,22 +2,55 @@ package employee;
 
 import contract.Contract;
 import employee.sellingRecord.SellingRecord;
+import employee.sellingRecord.SellingRecordListImpl;
 import payment.Payment;
 
 public class Employee {
-	public Employee(String employeeID, String employeeName, String employeePhoneNumber, String incidentDate, String position, SellingRecord sellingRecord, Contract contract, Payment payment) {
-		this.employeeID = employeeID;
-		this.employeeName = employeeName;
-		this.employeePhoneNumber = employeePhoneNumber;
-		this.incidentDate = incidentDate;
-		this.position = position;
-		this.sellingRecord = sellingRecord;
-		this.contract = contract;
-		this.payment = payment;
-	}
-
 
 	private String employeeID;
+	private String employeeName;
+	private String gender;
+	private String birth;
+	private String position;
+	private String address;
+	private String incidentDate;
+	private String phoneNumber;
+	public SellingRecordListImpl sellingRecordList;
+
+	public Employee(String employeeID, String employeeName,String gender, String birth, String phoneNumber, String position,
+					String address, String incidentDate) {
+		this.employeeID = employeeID;
+		this.employeeName = employeeName;
+		this.phoneNumber = phoneNumber;
+		this.incidentDate = incidentDate;
+		this.position = position;
+		this.gender = gender;
+		this.birth = birth;
+		this.address = address;
+
+		this.sellingRecordList = new SellingRecordListImpl();
+	}
+
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"employeeID='" + employeeID + '\n' +
+				", employeeName='" + employeeName + '\n' +
+				", gender='" + gender + '\n' +
+				", birth='" + birth + '\n' +
+				", position='" + position + '\n' +
+				", address='" + address + '\n' +
+				", incidentDate='" + incidentDate + '\n' +
+				", phoneNumber='" + phoneNumber + '\n' +
+				'}';
+	}
+	public SellingRecordListImpl getSellingRecordList() {
+		return sellingRecordList;
+	}
+
+	public void setSellingRecordList(SellingRecordListImpl sellingRecordList) {
+		this.sellingRecordList = sellingRecordList;
+	}
 
 	public String getEmployeeID() {
 		return employeeID;
@@ -36,11 +69,11 @@ public class Employee {
 	}
 
 	public String getEmployeePhoneNumber() {
-		return employeePhoneNumber;
+		return phoneNumber;
 	}
 
 	public void setEmployeePhoneNumber(String employeePhoneNumber) {
-		this.employeePhoneNumber = employeePhoneNumber;
+		this.phoneNumber = employeePhoneNumber;
 	}
 
 	public String getIncidentDate() {
@@ -59,37 +92,31 @@ public class Employee {
 		this.position = position;
 	}
 
-	public SellingRecord getSellingRecord() {
-		return sellingRecord;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSellingRecord(SellingRecord sellingRecord) {
-		this.sellingRecord = sellingRecord;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public Contract getContract() {
-		return contract;
+	public String getBirth() {
+		return birth;
 	}
 
-	public void setContract(Contract contract) {
-		this.contract = contract;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
-	public Payment getPayment() {
-		return payment;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	private String employeeName;
-	private String employeePhoneNumber;
-	private String incidentDate;
-	private String position;
-	public SellingRecord sellingRecord;
-	public Contract contract;
-	public Payment payment;
+
 
 
 

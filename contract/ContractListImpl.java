@@ -5,10 +5,12 @@ import java.util.stream.Collectors;
 
 public class ContractListImpl implements ContractList {
 
+
+
     public ArrayList<Contract> contractList;
 
-    public ContractListImpl(ArrayList<Contract> contractList) {
-        this.contractList = contractList;
+    public ContractListImpl() {
+        this.contractList = new ArrayList<Contract>();
     }
 
     @Override
@@ -39,12 +41,20 @@ public class ContractListImpl implements ContractList {
                 .orElse(null);
 
     }
-    public Contract getContractByID(int id) {
+    public Contract getContractByID(String id) {
         for (Contract contract : contractList) {
-            if (contract.getContractID() == id) {
+            if (contract.getContractID().equals(id)) {
                 return contract;
             }
         }
         return null;
+    }
+
+    public ArrayList<Contract> getContractList() {
+        return contractList;
+    }
+
+    public void setContractList(ArrayList<Contract> contractList) {
+        this.contractList = contractList;
     }
 }

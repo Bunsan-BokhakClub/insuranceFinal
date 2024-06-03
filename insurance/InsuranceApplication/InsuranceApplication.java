@@ -1,21 +1,21 @@
 package insurance.InsuranceApplication;
 
 public class InsuranceApplication { //보험 신청 임시 저장소
-    private String applicationId;
+
+    private int insuranceApplicationId;
     private String customerId;
     private String insuranceId;
-    private boolean isApproved;
 
-    public InsuranceApplication(String applicationId, String customerId, String insuranceId, boolean isApproved) {
-        this.applicationId = applicationId;
+
+
+    private String date;
+    public InsuranceApplication(int insuranceApplicationId, String customerId, String insuranceId, String date) {
+        this.insuranceApplicationId = insuranceApplicationId;
         this.customerId = customerId;
         this.insuranceId = insuranceId;
-        this.isApproved = isApproved;
+        this.date = date;
     }
 
-    public String getApplicationId() {
-        return applicationId;
-    }
 
     public String getCustomerId() {
         return customerId;
@@ -24,13 +24,19 @@ public class InsuranceApplication { //보험 신청 임시 저장소
     public String getInsuranceId() {
         return insuranceId;
     }
-
-    public boolean isApproved() {
-        return isApproved;
+    public String getDate() {
+        return date;
+    }
+    public int getInsuranceApplicationId() {
+        return insuranceApplicationId;
     }
 
-    public void setApproved(boolean approved) {
-        isApproved = approved;
+    public void setInsuranceApplicationId(int insuranceApplicationId) {
+        this.insuranceApplicationId = insuranceApplicationId;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
 

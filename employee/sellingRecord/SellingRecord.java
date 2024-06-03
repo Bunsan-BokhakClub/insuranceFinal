@@ -2,7 +2,6 @@ package employee.sellingRecord;
 
 public class SellingRecord {
 
-	private String conncludeDate;
 	private String contractDate;
 	private String customerID;
 	private String insuranceID;
@@ -13,9 +12,6 @@ public class SellingRecord {
 		this.contractDate = contractDate;
 	}
 
-	public String getConncludeDate() {
-		return conncludeDate;
-	}
 
 	public String getContractDate() {
 		return contractDate;

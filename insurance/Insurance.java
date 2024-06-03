@@ -29,6 +29,15 @@ public class Insurance {
 		this.paymentCycle = paymentCycle;
 	}
 
+	public Insurance (Insurance insurance) {
+		this.compensationAmount = insurance.getCompensationAmount();
+		this.cycleType = insurance.getCycleType();
+		this.insuranceName = insurance.getInsuranceName();
+		this.insuranceID = insurance.getInsuranceID();
+		this.insurancePeriod = insurance.getInsurancePeriod();
+		this.paymentAmount = insurance.getPaymentAmount();
+		this.paymentCycle = insurance.getPaymentCycle();
+	}
 
 
 

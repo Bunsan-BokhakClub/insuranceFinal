@@ -13,11 +13,11 @@ public class PersonalHistory {
 	}
 
 	public String gertDiseaseName(){
-		return "";
+		return diseaseName;
 	}
 
 	public String getOccurDate(){
-		return "";
+		return occurDate;
 	}
 
 }

@@ -5,14 +5,13 @@ import java.util.ArrayList;
 public class EmployeeListImpl implements EmployeeList {
 
 	private ArrayList<Employee> employeeList;
-	public Employee employee;
 
-	public EmployeeListImpl(ArrayList<Employee> employeeList){
-		this.employeeList = employeeList;
+	public EmployeeListImpl(){
+		this.employeeList = new ArrayList<Employee>();
 	}
 
-	public void add(){
-
+	public void add(Employee employee){
+		employeeList.add(employee);
 	}
 
 	public void delete(){

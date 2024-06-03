@@ -6,8 +6,8 @@ public class CompensationClaimListImpl implements CompensationClaimList {
 
 	private ArrayList<CompensationClaim> compensationClaimList;
 
-	public CompensationClaimListImpl(ArrayList<CompensationClaim> compensationClaimList){
-		this.compensationClaimList = compensationClaimList;
+	public CompensationClaimListImpl(){
+		this.compensationClaimList = new ArrayList<CompensationClaim>();
 	}
 
 

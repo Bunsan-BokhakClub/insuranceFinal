@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class SellingRecordListImpl implements SellingRecordList{
 
-    private ArrayList<SellingRecord> sellingRecordsList;
-    public SellingRecord sellingRecord;
 
+    private ArrayList<SellingRecord> sellingRecordsList;
+    public SellingRecordListImpl() {
+        this.sellingRecordsList = new ArrayList<SellingRecord>();
+    }
     @Override
     public void add(SellingRecord sellingRecord) {
         sellingRecordsList.add(sellingRecord);

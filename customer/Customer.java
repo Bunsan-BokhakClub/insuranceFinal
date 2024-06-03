@@ -25,16 +25,16 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer{" +
-				"customerID='" + customerID + '\'' +
-				", name='" + name + '\'' +
-				", gender='" + gender + '\'' +
-				", birth='" + birth + '\'' +
-				", phoneNumber='" + phoneNumber + '\'' +
-				", email='" + email + '\'' +
-				", address='" + address + '\'' +
-				", job='" + job + '\'' +
-				", familyHistoryList=" + familyHistoryList +
-				", personalHistoryList=" + personalHistoryList +
+				"customerID='" + customerID + '\n' +
+				", name='" + name + '\n' +
+				", gender='" + gender + '\n' +
+				", birth='" + birth + '\n' +
+				", phoneNumber='" + phoneNumber + '\n' +
+				", email='" + email + '\n' +
+				", address='" + address + '\n' +
+				", job='" + job + '\n' +
+				", familyHistoryList=" + familyHistoryList.toString() + '\n' +
+				", personalHistoryList=" + personalHistoryList.toString() +
 				'}';
 	}
 
