@@ -31,26 +31,6 @@ public class InsuranceListImpl implements InsuranceList {
         return null;
     }
 
-    @Override
-    public List<Insurance> getListByUserId(String customerID) {
-        List<Insurance> customerInsurances = new ArrayList<>();
-        for (Insurance insurance : insuranceList) {
-            if (insurance.getCustomerIDs().contains(customerID)) {
-                customerInsurances.add(insurance);
-            }
-        }
-        return customerInsurances;
-    }
-
-    @Override
-    public void update(Insurance insurance) {
-        for (int i = 0; i < insuranceList.size(); i++) {
-            if (insuranceList.get(i).getInsuranceID().equals(insurance.getInsuranceID())) {
-                insuranceList.set(i, insurance);
-                break;
-            }
-        }
-    }
 
 //     public InsuranceListImpl(ArrayList<Insurance> insuranceList) {
 //         this.insuranceList = insuranceList;

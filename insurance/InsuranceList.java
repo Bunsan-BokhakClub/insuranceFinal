@@ -11,10 +11,6 @@ public interface InsuranceList {
 
 	Insurance getInsuranceByID(String insuranceID);
 
-	List<Insurance> getListByUserId(String customerID);
-
-	void update(Insurance insurance);
-
     Insurance getInsuranceByName(String insuranceName);
 
 	public ArrayList<Insurance> get();

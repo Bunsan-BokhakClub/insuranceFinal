@@ -25,27 +25,15 @@ public class Contract {
 	private int compensationAmount;
 	private String cycleType;
 	private String paymentCycle;
-
-
-
 	private String insurancePeriod; //보험 기간.
 	private boolean contractStatus;
 	private boolean isPayment;
-
 	private String contractID;
 	private int age;
 	private String concludeDate;
-
 	private String email;
-
-
 	private String endDate;
-
 	private PaymentListImpl paymentList;
-
-
-
-
 	public CompensationClaimListImpl compensationClaimList;
 
 	public Contract(String address, int age, String birth, int compensationAmount, String concludeDate, String customerID, String customerName,
@@ -100,15 +88,6 @@ public class Contract {
 				'}' +'\n' + "\n";
 	}
 
-	private static double calculateRefund() {
-
-//		String endDate = concludeDate
-		// 환급금 계산 로직 (예시)
-		// 실제 로직은 보험사의 환급 정책에 따라 다를 수 있음
-		double totalPaidAmount = 1000000; // 총 납부 금액 (예시)
-		double refundRate = 0.8; // 환급 비율 (예시)
-		return totalPaidAmount * refundRate;
-	}
 
 	public String addYearsToDate() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -134,6 +113,47 @@ public class Contract {
 	}
 
 	//********************* Getter 및 Setter 메서드************************
+
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -142,23 +162,28 @@ public class Contract {
 		this.address = address;
 	}
 
-	public int getAge() {
-		return age;
+	public String getInsuranceID() {
+		return insuranceID;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setInsuranceID(String insuranceID) {
+		this.insuranceID = insuranceID;
 	}
 
-	public String getBirth() {
-		return birth;
-	}
-	public String getInsurancePeriod() {
-		return insurancePeriod;
+	public String getInsuranceName() {
+		return insuranceName;
 	}
 
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setInsuranceName(String insuranceName) {
+		this.insuranceName = insuranceName;
+	}
+
+	public int getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	public void setPaymentAmount(int paymentAmount) {
+		this.paymentAmount = paymentAmount;
 	}
 
 	public int getCompensationAmount() {
@@ -169,93 +194,12 @@ public class Contract {
 		this.compensationAmount = compensationAmount;
 	}
 
-	public String getConcludeDate() {
-		return concludeDate;
-	}
-
-	public void setConcludeDate(String concludeDate) {
-		this.concludeDate = concludeDate;
-	}
-	public int getPaymentAmount() {
-		return paymentAmount;
-	}
-
-	public String getInsuranceName() {
-		return insuranceName;
-	}
-	public PaymentListImpl getPaymentList() {
-		return paymentList;
-	}
-
-	public void setPaymentList(PaymentListImpl paymentList) {
-		this.paymentList = paymentList;
-	}
-
-	public String getCustomerID() {
-		return customerID;
-	}
-
-	public String getInsuranceID() {
-		return insuranceID;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	
-
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
-	}
-
-
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
 	public String getCycleType() {
 		return cycleType;
 	}
 
 	public void setCycleType(String cycleType) {
 		this.cycleType = cycleType;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-
-	public void setInsuranceID(String insuranceID) {
-		this.insuranceID = insuranceID;
-	}
-
-
-	public void setInsuranceName(String insuranceName) {
-		this.insuranceName = insuranceName;
-	}
-
-
-	public void setPaymentAmount(int paymentAmount) {
-		this.paymentAmount = paymentAmount;
 	}
 
 	public String getPaymentCycle() {
@@ -266,8 +210,28 @@ public class Contract {
 		this.paymentCycle = paymentCycle;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public String getInsurancePeriod() {
+		return insurancePeriod;
+	}
+
+	public void setInsurancePeriod(String insurancePeriod) {
+		this.insurancePeriod = insurancePeriod;
+	}
+
+	public boolean isContractStatus() {
+		return contractStatus;
+	}
+
+	public void setContractStatus(boolean contractStatus) {
+		this.contractStatus = contractStatus;
+	}
+
+	public boolean isPayment() {
+		return isPayment;
+	}
+
+	public void setPayment(boolean payment) {
+		isPayment = payment;
 	}
 
 	public String getContractID() {
@@ -278,6 +242,30 @@ public class Contract {
 		this.contractID = contractID;
 	}
 
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getConcludeDate() {
+		return concludeDate;
+	}
+
+	public void setConcludeDate(String concludeDate) {
+		this.concludeDate = concludeDate;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getEndDate() {
 		return endDate;
 	}
@@ -285,6 +273,23 @@ public class Contract {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	public PaymentListImpl getPaymentList() {
+		return paymentList;
+	}
+
+	public void setPaymentList(PaymentListImpl paymentList) {
+		this.paymentList = paymentList;
+	}
+
+	public CompensationClaimListImpl getCompensationClaimList() {
+		return compensationClaimList;
+	}
+
+	public void setCompensationClaimList(CompensationClaimListImpl compensationClaimList) {
+		this.compensationClaimList = compensationClaimList;
+	}
+
 
 	//********************* Getter 및 Setter 메서드************************
 

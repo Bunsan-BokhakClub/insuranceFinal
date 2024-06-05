@@ -4,17 +4,17 @@ import partner.rate.RateListImpl;
 
 public class Partner {
 
-	private int partnerID;
+	private String partnerID;
 	private String partnerName;
 	private String partnerType;
 	private String partnerAddress;
 	private String partnerPhoneNumber;
+	private RateListImpl rateList;
 
 	public RateListImpl getRateList() {
 		return rateList;
 	}
 
-	private RateListImpl rateList;
 
 	public Partner(String partnerName, String partnerType, String partnerAddress, String partnerContactInformation) {
 		this.partnerName = partnerName;
@@ -25,9 +25,6 @@ public class Partner {
 		this.rateList = new RateListImpl();
 	}
 
-	public int getPartnerID() {
-		return partnerID;
-	}
 
 	public String getPartnerName() {
 		return partnerName;

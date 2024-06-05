@@ -13,5 +13,4 @@ public interface CustomerList {
 
 	Customer getCustomerByID(String customerId);
 
-    Customer getCustomerByPhoneNumber(String phoneNumber);
 }

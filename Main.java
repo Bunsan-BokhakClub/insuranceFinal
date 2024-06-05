@@ -513,7 +513,7 @@ public class Main {
         } else if (userInput.equals("보상금 요청")) {
             System.out.println("보상금을 요청할 계약 ID를 입력하세요: ");
             String contractID = br.readLine().trim();
-            CompensationClaim compensationClaim = compensationClaimList.getCompensationSlaimByID(contractID);
+            CompensationClaim compensationClaim = compensationClaimList.getCompensationClaimByID(contractID);
             if(compensationClaim != null) {
                 System.out.println(compensationClaim.getSurvey().getManagerName()
                         + " / " + compensationClaim.getDocumentFile()

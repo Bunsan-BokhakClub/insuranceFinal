@@ -15,7 +15,6 @@ public class Insurance {
 	private int paymentAmount; //보험료
 	private String paymentCycle; //갱신 주기
 
-	private List<String> customerIDs;
 
 	public Insurance(int compensationAmount, String cycleType, String insuranceName,
 					 String insuranceID, int paymentAmount,
@@ -45,9 +44,6 @@ public class Insurance {
 		return insuranceID;
 	}
 
-	public List<String> getCustomerIDs() {
-		return customerIDs;
-	}
 
 	public String getInsuranceName() {
 		return insuranceName;
@@ -69,9 +65,6 @@ public class Insurance {
 		this.paymentAmount = paymentAmount;
 	}
 
-	public void addCustomerID(String customerID) {
-		this.customerIDs.add(customerID);
-	}
 
 	public void updateCompensation(int compensationAmount) {
 		this.compensationAmount = compensationAmount;

@@ -26,17 +26,6 @@ public class CustomerListImpl implements CustomerList {
 		return null;
 	}
 
-	@Override
-	public Customer getCustomerByPhoneNumber(String phoneNumber) {
-		for (Customer customer : customerList) {
-			if (customer.getPhoneNumber().equals(phoneNumber)) {
-				return customer;
-			}
-		}
-		return null;
-	}
-
-
 	public ArrayList<Customer> get(){
 		return customerList;
 	}

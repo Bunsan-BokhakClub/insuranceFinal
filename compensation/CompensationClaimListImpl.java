@@ -28,7 +28,7 @@ public class CompensationClaimListImpl implements CompensationClaimList {
 
 	}
 
-    public CompensationClaim getCompensationSlaimByID(String id) {
+    public CompensationClaim getCompensationClaimByID(String id) {
 		for (CompensationClaim compensationClaim : compensationClaimList) {
 			if (compensationClaim.getContractID().equals(id)) {
 				return compensationClaim;
