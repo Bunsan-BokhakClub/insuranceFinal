@@ -561,23 +561,95 @@ public class Main {
         insuranceList.add(travelInsurance);
     }
 
+//    public static void modifyInsurance() throws IOException, CustomException {
+//        System.out.println("보험 수정을 처리합니다.\n");
+//
+//        System.out.println("보험 종류를 선택하세요.");
+//        System.out.println("1. 일반보험 || 2. 건강보험 || 3. 자동차보험 || 4. 여행자보험");
+//        System.out.println("등록하실 보험 종류의 숫자를 입력해주세요.");
+//        int insuranceType = Integer.parseInt(br.readLine().trim());
+//
+//        // 2. 보험 이름 입력창 출력
+//        System.out.print("보험 이름을 입력하세요: ");
+//        String insuranceName = br.readLine().trim();
+//
+//        // 3. 해당 정보를 입력 후 조회
+//        Insurance insurance = insuranceList.getInsuranceByName(insuranceName);
+//
+//        // 4. 해당 보험의 정보 수정창 출력
+//        System.out.println("현재 보험 정보:");
+//        System.out.println(insurance.toString());
+//
+//        System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
+//
+//        // 5. 정보 수정 입력
+//        System.out.print("보험 이름 (" + insurance.getInsuranceName() + "): ");
+//        String newInsuranceName = br.readLine().trim();
+//        if (!newInsuranceName.isEmpty()) {
+//            insurance.setInsuranceName(newInsuranceName);
+//        }
+//
+//        System.out.print("보험료 (" + insurance.getPaymentAmount() + "): ");
+//        String newInsurancePremiumStr = br.readLine().trim();
+//        if (!newInsurancePremiumStr.isEmpty()) {
+//            int newInsurancePremium = Integer.parseInt(newInsurancePremiumStr);
+//            insurance.setPaymentAmount(newInsurancePremium);
+//        }
+//
+//        System.out.print("보상금 (" + insurance.getCompensationAmount() + "): ");
+//        String newCompensationAmountStr = br.readLine().trim();
+//        if (!newCompensationAmountStr.isEmpty()) {
+//            int newCompensationAmount = Integer.parseInt(newCompensationAmountStr);
+//            insurance.setCompensationAmount(newCompensationAmount);
+//        }
+//
+//        System.out.print("갱신 상태 (" + insurance.getCycleType() + "): ");
+//        String newRenewalStatus = br.readLine().trim();
+//        if (!newRenewalStatus.isEmpty()) {
+//            insurance.setCycleType(newRenewalStatus);
+//        }
+//
+//        System.out.print("갱신 주기 (" + insurance.getPaymentCycle() + "): ");
+//        String newRenewalCycle = br.readLine().trim();
+//        if (!newRenewalCycle.isEmpty()) {
+//            insurance.setPaymentCycle(newRenewalCycle);
+//        }
+//
+//        System.out.print("보험 기간 (" + insurance.getInsurancePeriod() + "): ");
+//        String newInsurancePeriod = br.readLine().trim();
+//        if (!newInsurancePeriod.isEmpty()) {
+//            insurance.setInsurancePeriod(newInsurancePeriod);
+//        }
+//
+//        System.out.println("\n수정이 완료되었습니다.");
+//    }
+
     public static void modifyInsurance() throws IOException, CustomException {
         System.out.println("보험 수정을 처리합니다.\n");
 
-        // 2. 보험 이름 입력창 출력
         System.out.print("보험 이름을 입력하세요: ");
         String insuranceName = br.readLine().trim();
 
-        // 3. 해당 정보를 입력 후 조회
+        // 해당 정보를 입력 후 조회
         Insurance insurance = insuranceList.getInsuranceByName(insuranceName);
 
-        // 4. 해당 보험의 정보 수정창 출력
-        System.out.println("현재 보험 정보:");
+        // 보험 종류를 확인하여 사용자에게 출력
+        System.out.println("해당 보험은 다음과 같은 종류입니다: ");
+        if (insurance instanceof HealthInsurance) {
+            System.out.println("2. 건강보험");
+        } else if (insurance instanceof CarInsurance) {
+            System.out.println("3. 자동차보험");
+        } else if (insurance instanceof TravelInsurance) {
+            System.out.println("4. 여행자보험");
+        } else {
+            System.out.println("1. 일반보험");
+        }
+
+        System.out.println("\n현재 보험 정보:");
         System.out.println(insurance.toString());
 
         System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
 
-        // 5. 정보 수정 입력
         System.out.print("보험 이름 (" + insurance.getInsuranceName() + "): ");
         String newInsuranceName = br.readLine().trim();
         if (!newInsuranceName.isEmpty()) {
@@ -616,8 +688,44 @@ public class Main {
             insurance.setInsurancePeriod(newInsurancePeriod);
         }
 
+        // 보험 종류에 따른 수정 메서드 호출
+        if (insurance instanceof HealthInsurance) {
+            modifyHealthInsurance((HealthInsurance) insurance);
+        } else if (insurance instanceof CarInsurance) {
+            modifyCarInsurance((CarInsurance) insurance);
+        } else if (insurance instanceof TravelInsurance) {
+            modifyTravelInsurance((TravelInsurance) insurance);
+        }
+
         System.out.println("\n수정이 완료되었습니다.");
     }
+
+    private static void modifyHealthInsurance(HealthInsurance insurance) throws IOException {
+        System.out.print("보장 질환 목록 (" + insurance.getDiseaseList() + "): ");
+        String newDiseaseListStr = br.readLine().trim();
+        if (!newDiseaseListStr.isEmpty()) {
+            String[] diseases = newDiseaseListStr.split(",");
+            ArrayList<String> diseaseList = new ArrayList<>(Arrays.asList(diseases));
+            insurance.setDiseaseList(diseaseList);
+        }
+    }
+
+    private static void modifyCarInsurance(CarInsurance insurance) throws IOException {
+        System.out.print("자동차 종류 (" + insurance.getModel() + "): ");
+        String newCarModel = br.readLine().trim();
+        if (!newCarModel.isEmpty()) {
+            insurance.setModel(newCarModel);
+        }
+    }
+
+    private static void modifyTravelInsurance(TravelInsurance insurance) throws IOException {
+        System.out.print("국가명 (" + insurance.getCountryName() + "): ");
+        String newCountryName = br.readLine().trim();
+        if (!newCountryName.isEmpty()) {
+            insurance.setCountryName(newCountryName);
+        }
+    }
+
 
     public static void queryCustomerInfo() throws IOException, CustomException{
         System.out.println("고객 정보 조회를 처리합니다.");

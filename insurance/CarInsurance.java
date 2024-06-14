@@ -9,6 +9,14 @@ public class CarInsurance extends Insurance {
 		this.model = model;
 	}
 
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
 	@Override
 	public String toString() {
 		return super.toString() + '\n' +
