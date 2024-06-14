@@ -1,9 +1,11 @@
 package contract.tempContract;
 
+import exception.CustomException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TempContractListImpl {
+public class TempContractListImpl implements TempContractList {
     private List<TempContract> tempContractList;
 
     public TempContractListImpl() {
@@ -24,12 +26,12 @@ public class TempContractListImpl {
         return returnValue;
     }
 
-    public TempContract getInsuranceTempContractById(String id) {
+    public TempContract getInsuranceTempContractById(String id) throws CustomException {
         for (TempContract tempContract : tempContractList) {
             if (tempContract.getTempContractID() == Integer.parseInt(id))
                 return tempContract;
         }
-        return null;
+        throw new CustomException("해당 정보가 존재하지 않습니다.");
     }
 }
 
