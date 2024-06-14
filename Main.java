@@ -67,7 +67,7 @@ public class Main {
 
         employeeList = new EmployeeListImpl();
         complaintList = new ComplaintListImpl();
-
+        createDummyDate();
         String userChoice = "";
         while (!userChoice.equals("x")) {
             showMenu();
@@ -197,7 +197,7 @@ public class Main {
         //내부 클래스에서 예외 시 Throw 사용
         partnerList.getPartnerByName(partnerName);
 
-        CompensationClaim compensationClaim = new CompensationClaim(contract.getCustomer().getCustomerID(), contract.getCustomer().getCustomerName(), claimDocument,
+        CompensationClaim compensationClaim = new CompensationClaim(contract.getCustomer().getCustomerID(), claimantName, claimDocument,
                 contract.getInsurance().getInsuranceID(), contract.getInsurance().getInsuranceName());
 
         compensationClaimList.add(compensationClaim);
@@ -215,10 +215,7 @@ public class Main {
         String userChoice = br.readLine().trim();
         Insurance seletedInsurance = insuranceList.getInsuranceByID(userChoice);
 
-        System.out.println(seletedInsurance.getInsuranceID() + " / " + seletedInsurance.getInsuranceName()
-                + " / " + seletedInsurance.getPaymentAmount() + " / " + seletedInsurance.getCompensationAmount()
-                + " / " + seletedInsurance.getCycleType() + " / " + seletedInsurance.getPaymentCycle()
-                + " / " + seletedInsurance.getInsurancePeriod());
+        System.out.println(seletedInsurance.toString());
         System.out.println("메인 화면으로 돌아가려면 x를, 보험을 신청하시려면 보험 ID를 입력해주세요: ");
         userChoice = br.readLine().trim();
 
@@ -248,14 +245,25 @@ public class Main {
         System.out.println(customer.getName() + " 님 확인 되었습니다.");
         System.out.println(customer.getName() + "님의 보험 리스트 입니다.");
         for (Contract contract : contractList.getContractList()) {
-            contract.toString();
+            if (contract.getCustomer().getCustomerID().equals(customerId))
+                System.out.println("계약 ID = " + contract.getContractID() + "\n" +
+                        "보험 ID = " + contract.getInsurance().getInsuranceID() + "\n" +
+                        "보험 이름 = " + contract.getInsurance().getInsuranceName() + "\n" +
+                        "보험료 = " + contract.getInsurance().getPaymentAmount() + "\n" +
+                        "보상금 = " + contract.getInsurance().getCompensationAmount());
+
         }
         System.out.print("선택할 계약 번호를 입력하세요: ");
         String choice = br.readLine().trim();
         Contract contract = contractList.getContractByID(choice);
 
-        System.out.println(contract.getInsurance().getInsuranceID() + " " + contract.getInsurance().getInsuranceName() + " " + contract.getInsurance().getPaymentAmount() +
-                " " + contract.getInsurance().getCompensationAmount() + " " + contract.getInsurance().getCycleType() + " " + contract.getInsurance().getPaymentCycle() + " " + contract.getInsurance().getInsurancePeriod());
+        System.out.println("보험 ID = " + contract.getInsurance().getInsuranceID() + "\n" +
+                "보험 이름 = " + contract.getInsurance().getInsuranceName() + "\n" +
+                "보험료 = " + contract.getInsurance().getPaymentAmount() + "\n" +
+                "보상금 = " + contract.getInsurance().getCompensationAmount() + "\n" +
+                "갱신 상태 = " + contract.getInsurance().getCycleType() + "\n" +
+                "갱신 주기 = " + contract.getInsurance().getPaymentCycle() + "\n" +
+                "보험 기간 = " + contract.getInsurance().getInsurancePeriod());
         System.out.println("해지하시겠습니까? Y/N");
         choice = br.readLine().trim();
         if (choice.equals("N")) return;
@@ -436,7 +444,7 @@ public class Main {
     public static void assessDamage() throws IOException, CustomException {
         for (CompensationClaim compensationClaim : compensationClaimList.get()) {
             System.out.println(compensationClaim.getContractID() + " / " + compensationClaim.getInsuranceName()
-                    +  " / " + compensationClaim.getCustomerName());
+                    +  " / " + compensationClaim.getClaimantName());
         }
         System.out.println("손해 사정을 하려면 \"손해 사정\"을, 보상금 요청을 하려면 \"보상금 요청\"을 입력하세요: ");
         String userInput = br.readLine().trim();
@@ -1036,4 +1044,47 @@ public class Main {
         System.out.println("보험 가입 신청이 승인되었습니다.");
     }
     //--------------------------queryInsuranceApplication 내부 함수들 끝------------------
+
+    public static void createDummyDate() {
+        //보험 등록
+        Insurance insurance1 = new Insurance(500000, "비갱신","표준 플랜", Integer.toString(insuranceIndex++),
+                50000,"0", "12");
+        Insurance insurance2 = new Insurance(1000000, "비갱신", "고급 자동차 플랜", Integer.toString(insuranceIndex++),
+                120000, "0", "24");
+        Insurance carInsurance = new CarInsurance(insurance2, "G80");
+        Insurance insurance3 = new Insurance(300000, "비갱신", "기본 여행 플랜", Integer.toString(insuranceIndex++),
+                25000, "0", "36");
+        Insurance travelInsurance = new TravelInsurance(insurance3, "일본");
+        Insurance insurance4 = new Insurance(750000, "비갱신", "프리미엄 건강 플랜", Integer.toString(insuranceIndex++),
+                80000, "0", "18");
+        Insurance healthInsurance = new HealthInsurance(insurance4, new ArrayList<>(Arrays.asList("암", "관절염")));
+
+        insuranceList.add(insurance1);
+        insuranceList.add(carInsurance);
+        insuranceList.add(travelInsurance);
+        insuranceList.add(healthInsurance);
+
+        //고객 등록
+        FamilyHistoryImpl familyHistoryList = new FamilyHistoryImpl();
+        PersonalHistoryImpl personalHistoryList = new PersonalHistoryImpl();
+
+        FamilyHistory familyHistory = new FamilyHistory("대장암", "부");
+        familyHistoryList.add(familyHistory);
+
+        PersonalHistory personalHistory = new PersonalHistory("관절염", "2010-07-15");
+        personalHistoryList.add(personalHistory);
+
+        Customer customer1 = new Customer("1", "김철수", "남성", "1985-02-15", "010-1234-5678", "chulsoo@example.com", "서울시 강남구", "회사원", familyHistoryList, personalHistoryList);
+        Customer customer2 = new Customer("2", "이영희", "여성", "1990-07-20", "010-2345-6789", "younghee@example.com", "부산시 해운대구", "디자이너", new FamilyHistoryImpl(), new PersonalHistoryImpl());
+
+        customerList.add(customer1);
+        customerList.add(customer2);
+
+        //직원 등록
+        Employee employee1 = new Employee("EMP001", "홍길동", "남성", "1980-01-15", "010-1234-5678", "매니저", "서울시 종로구", "2024-01-10");
+        Employee employee2 = new Employee("EMP002", "김영희", "여성", "1992-06-20", "010-2345-6789", "개발자", "부산시 해운대구", "2024-01-15");
+
+        employeeList.add(employee1);
+        employeeList.add(employee2);
+    }
 }
