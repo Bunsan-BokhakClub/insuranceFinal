@@ -14,14 +14,17 @@ public class TempContractListImpl {
         tempContractList.add(application);
     }
 
-    public String getAllApplications() {
+    public String getAllTempContract() {
         String returnValue = "";
         for (TempContract tempContract : tempContractList)
-            returnValue += tempContract.getTempContractID() + " / " + tempContract.getCustomerId() + " / " + tempContract.getInsuranceId() + " / " + tempContract.getDate() + "\n";
+            returnValue += "계약  ID = " + tempContract.getTempContractID() + "\n" +
+                    "신청 고객 ID = " + tempContract.getCustomerId() + "\n" +
+                    "보험 ID = " + tempContract.getInsuranceId() + "\n" +
+                    "신청 일자 = " + tempContract.getDate() + "\n\n";
         return returnValue;
     }
 
-    public TempContract getInsuranceApplicationById(String id) {
+    public TempContract getInsuranceTempContractById(String id) {
         for (TempContract tempContract : tempContractList) {
             if (tempContract.getTempContractID() == Integer.parseInt(id))
                 return tempContract;

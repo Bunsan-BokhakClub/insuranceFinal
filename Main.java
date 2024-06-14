@@ -151,22 +151,18 @@ public class Main {
         String insuranceId = br.readLine().trim();
 
         Contract contract = contractList.getContractByID(customerId + insuranceId);
-        if (contract != null) {
-            System.out.println("계약 정보:");
-            System.out.println("보험 이름: " + contract.getInsurance().getInsuranceName());
-            System.out.println("고객 이름: " + contract.getCustomer().getCustomerName());
-            System.out.println("전화번호: " + contract.getCustomer().getPhoneNumber());
+        System.out.println("계약 정보:");
+        System.out.println("보험 이름: " + contract.getInsurance().getInsuranceName());
+        System.out.println("고객 이름: " + contract.getCustomer().getCustomerName());
+        System.out.println("전화번호: " + contract.getCustomer().getPhoneNumber());
 
-            System.out.println("\n금액을 청구하시겠습니까?");
-            System.out.print("Y / N : ");
-            String yN = br.readLine().trim();
-            if (yN.equalsIgnoreCase("Y")) {
-                processClaim(contract);
-            } else {
-                System.out.println("금액 청구가 취소되었습니다.");
-            }
+        System.out.println("\n금액을 청구하시겠습니까?");
+        System.out.print("Y / N : ");
+        String yN = br.readLine().trim();
+        if (yN.equalsIgnoreCase("Y")) {
+            processClaim(contract);
         } else {
-            System.out.println("해당 고객 정보를 찾을 수 없습니다.");
+            System.out.println("금액 청구가 취소되었습니다.");
         }
     }
 
@@ -209,7 +205,10 @@ public class Main {
 
         //보험 정보 출력
         for (Insurance insurance : insuranceList.get()) {
-            System.out.println(insurance.getInsuranceID() + " / " + insurance.getInsuranceName() + " / " + insurance.getPaymentAmount() + " / " + insurance.getCompensationAmount() +"\n");
+            System.out.println("보험 ID = " + insurance.getInsuranceID() + "\n" +
+                    "보험 이름 = " + insurance.getInsuranceName() + "\n" +
+                    "보험료 = " + insurance.getPaymentAmount() + "\n" +
+                    "보상금 = " + insurance.getCompensationAmount() + "\n");
         }
         System.out.println("조회를 원하는 보험 ID를 입력해주세요 : ");
         String userChoice = br.readLine().trim();
@@ -1028,10 +1027,10 @@ public class Main {
 
     public static void queryInsuranceApplication() throws IOException, CustomException {
         System.out.println("보험 가입 신청 내역 조회를 처리합니다.");
-        System.out.println(tempContractList.getAllApplications());
+        System.out.println(tempContractList.getAllTempContract());
         System.out.print("승인할 신청 ID: ");
         String applicationId = br.readLine().trim();
-        TempContract application = tempContractList.getInsuranceApplicationById(applicationId);
+        TempContract application = tempContractList.getInsuranceTempContractById(applicationId);
 
         Customer customer = customerList.getCustomerByID(application.getCustomerId());
         Insurance insurance = insuranceList.getInsuranceByID(application.getInsuranceId());
