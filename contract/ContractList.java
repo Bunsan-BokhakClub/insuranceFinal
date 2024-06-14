@@ -1,12 +1,12 @@
 package contract;
 
+import exception.CustomException;
+
 public interface ContractList {
 
     void add(Contract contract);
 
-    Contract getContractByNameAndPN(String cusName, String pN);
-
-    Contract getContractByID(String id);
+    Contract getContractByID(String id) throws CustomException;
 
 
     }

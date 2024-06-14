@@ -1,16 +1,18 @@
 package customer;
 
+import exception.CustomException;
+
 import java.util.ArrayList;
 
 public interface CustomerList {
-	public void add(Customer customer);
+	void add(Customer customer);
 
-	public void delete(String customerID);
+	void delete(String customerID);
 
-	public ArrayList<Customer> get();
+	ArrayList<Customer> get();
 
-	public void update();
+	void update();
 
-	Customer getCustomerByID(String customerId);
+	Customer getCustomerByID(String customerId) throws CustomException;
 
 }

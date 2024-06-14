@@ -39,7 +39,6 @@ public class Insurance {
 	}
 
 
-
 	public String getInsuranceID() {
 		return insuranceID;
 	}
@@ -114,5 +113,16 @@ public class Insurance {
 
 	public void setInsurancePeriod(String insurancePeriod) {
 		this.insurancePeriod = insurancePeriod;
+	}
+
+	@Override
+	public String toString() {
+		return "보험 ID='" + insuranceID + '\n' +
+				", 보험이름 ='" + insuranceName + '\n' +
+				", 보험료 =" + paymentAmount + '\n' +
+				", 보상금 =" + compensationAmount + '\n' +
+				", 갱신 상태(자동갱신, 비갱신) ='" + cycleType + '\n' +
+				", 갱신 주기='" + paymentCycle + '\n'+
+				", 보험 기간='" + insurancePeriod;
 	}
 }

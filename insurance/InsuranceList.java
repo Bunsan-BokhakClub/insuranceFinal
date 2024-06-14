@@ -1,5 +1,7 @@
 package insurance;
 
+import exception.CustomException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,10 @@ public interface InsuranceList {
 
 	void delete(String insuranceID);
 
-	Insurance getInsuranceByID(String insuranceID);
+	Insurance getInsuranceByID(String insuranceID) throws CustomException;
 
-    Insurance getInsuranceByName(String insuranceName);
+    Insurance getInsuranceByName(String insuranceName) throws CustomException;
 
-	public ArrayList<Insurance> get();
+	 ArrayList<Insurance> get();
 
 }

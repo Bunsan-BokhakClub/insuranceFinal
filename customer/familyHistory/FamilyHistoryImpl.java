@@ -1,12 +1,20 @@
 package customer.familyHistory;
 
-import customer.Customer;
-import customer.personalHistory.PersonalHistory;
-
 import java.util.ArrayList;
 
 
 public class FamilyHistoryImpl implements FamilyHistoryList {
+
+    private ArrayList<FamilyHistory> familyHistoryArrayList;
+
+    public FamilyHistoryImpl() {
+        familyHistoryArrayList = new ArrayList<FamilyHistory>();
+    }
+
+    @Override
+    public void add(FamilyHistory familyHistory) {
+        familyHistoryArrayList.add(familyHistory);
+    }
 
     @Override
     public String toString() {
@@ -16,18 +24,4 @@ public class FamilyHistoryImpl implements FamilyHistoryList {
         }
         return answer;
     }
-
-    private ArrayList<FamilyHistory> familyHistoryArrayList;
-
-    public FamilyHistoryImpl() {
-        familyHistoryArrayList = new ArrayList<FamilyHistory>();
-    }
-
-
-
-    @Override
-    public void add(FamilyHistory familyHistory) {
-        familyHistoryArrayList.add(familyHistory);
-    }
-
 }

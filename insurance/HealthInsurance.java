@@ -19,4 +19,10 @@ public class HealthInsurance extends Insurance {
 	public void setDiseaseList(ArrayList<String> diseaseList) {
 		this.diseaseList = diseaseList;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + '\n' +
+				"보장 질환 목록 : " + "\n" + diseaseList.toString();
+	}
 }

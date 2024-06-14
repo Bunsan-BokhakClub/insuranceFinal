@@ -4,12 +4,7 @@ import java.util.ArrayList;
 
 public interface EmployeeList {
 
-	public void add(Employee employee);
+	void add(Employee employee);
 
-	public void delete();
-
-	public ArrayList<Employee> get();
-
-	public void update();
-
+	ArrayList<Employee> get();
 }

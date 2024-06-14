@@ -1,4 +1,6 @@
 package customer;
+import exception.CustomException;
+
 import java.util.ArrayList;
 
 public class CustomerListImpl implements CustomerList {
@@ -17,13 +19,13 @@ public class CustomerListImpl implements CustomerList {
 		customerList.removeIf(customer -> customer.getCustomerID().equals(customerID));
 	}
 
-	public Customer getCustomerByID(String customerID) {
+	public Customer getCustomerByID(String customerID) throws CustomException {
 		for (Customer customer : customerList) {
 			if (customer.getCustomerID().equals(customerID)) {
 				return customer;
 			}
 		}
-		return null;
+		throw new CustomException("해당 정보가 존재하지 않습니다.");
 	}
 
 	public ArrayList<Customer> get(){

@@ -3,19 +3,16 @@ package insurance;
 public class TravelInsurance extends Insurance {
 
 	private String countryName;
-	private int travelDate;
 
-	public TravelInsurance(Insurance insurance, String countryName, int travelDate) {
+	public TravelInsurance(Insurance insurance, String countryName) {
 		super(insurance);
 		this.countryName = countryName;
-		this.travelDate = travelDate;
+
 	}
 
-	public String getCountryName() {
-		return countryName;
-	}
-
-	public int getTravelDate() {
-		return travelDate;
+	@Override
+	public String toString() {
+		return super.toString() + '\n' +
+				"국가 = " + countryName;
 	}
 }

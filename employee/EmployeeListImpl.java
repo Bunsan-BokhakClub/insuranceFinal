@@ -1,5 +1,7 @@
 package employee;
 
+import exception.CustomException;
+
 import java.util.ArrayList;
 
 public class EmployeeListImpl implements EmployeeList {
@@ -14,25 +16,16 @@ public class EmployeeListImpl implements EmployeeList {
 		employeeList.add(employee);
 	}
 
-	public void delete(){
-
-	}
-
 	public ArrayList<Employee> get(){
 		return employeeList;
 	}
 
-	public Employee getEmployeeByID(String id) {
+	public Employee getEmployeeByID(String id) throws CustomException {
 		for (Employee employee : employeeList) {
 			if (employee.getEmployeeID().equals(id)) {
 				return employee;
 			}
 		}
-		return null;
+		throw new CustomException("해당 정보가 존재하지 않습니다.");
 	}
-
-	public void update(){
-
-	}
-
 }

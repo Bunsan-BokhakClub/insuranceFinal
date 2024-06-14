@@ -2,14 +2,16 @@ package insurance;
 
 public class CarInsurance extends Insurance {
 
-	private String distance;
 	private String model;
-	private String year;
 
-	public CarInsurance(Insurance insurance, String distance, String model, String year) {
+	public CarInsurance(Insurance insurance, String model) {
 		super(insurance);
-		this.distance = distance;
 		this.model = model;
-		this.year = year;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + '\n' +
+				"자동차 종류 = " + model;
 	}
 }

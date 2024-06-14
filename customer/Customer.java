@@ -24,18 +24,16 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer{" +
-				"customerID='" + customerID + '\n' +
-				", name='" + name + '\n' +
-				", gender='" + gender + '\n' +
-				", birth='" + birth + '\n' +
-				", phoneNumber='" + phoneNumber + '\n' +
-				", email='" + email + '\n' +
-				", address='" + address + '\n' +
-				", job='" + job + '\n' +
-				", familyHistoryList=" + familyHistoryList.toString() + '\n' +
-				", personalHistoryList=" + personalHistoryList.toString() +
-				'}';
+		return 	"고객 ID = " + customerID + '\n' +
+				", 이름 = " + name + '\n' +
+				", 성별 = " + gender + '\n' +
+				", 생년월일 = " + birth + '\n' +
+				", 전화번호 = " + phoneNumber + '\n' +
+				", 이메일 = " + email + '\n' +
+				", 주소 = " + address + '\n' +
+				", 직업 = " + job + '\n' +
+				", 가족력 리스트 : " + '\n' + familyHistoryList.toString() + '\n' +
+				", 개인병력 리스트 : " + '\n' +personalHistoryList.toString();
 	}
 
 	public Customer(String customerID, String name, String gender, String birth,

@@ -1,5 +1,7 @@
 package insurance;
 
+import exception.CustomException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,29 +24,24 @@ public class InsuranceListImpl implements InsuranceList {
     }
 
     @Override
-    public Insurance getInsuranceByID(String insuranceID) {
+    public Insurance getInsuranceByID(String insuranceID) throws CustomException {
         for (Insurance insurance : insuranceList) {
             if (insurance.getInsuranceID().equals(insuranceID)) {
                 return insurance;
             }
         }
-        return null;
+        throw new CustomException("해당 정보가 존재하지 않습니다.");
     }
 
-
-//     public InsuranceListImpl(ArrayList<Insurance> insuranceList) {
-//         this.insuranceList = insuranceList;
-//     }
-
-
-    public Insurance getInsuranceByName(String insName) {
+    public Insurance getInsuranceByName(String insName) throws CustomException{
         return insuranceList.stream()
                 .filter(insurance -> insurance.getInsuranceName().equals(insName))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new CustomException("해당 정보가 존재하지 않습니다."));
     }
 
     public ArrayList<Insurance> get(){
         return insuranceList;
     }
+
 }

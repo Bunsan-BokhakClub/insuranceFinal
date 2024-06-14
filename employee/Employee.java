@@ -33,17 +33,16 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee{" +
-				"employeeID='" + employeeID + '\n' +
-				", employeeName='" + employeeName + '\n' +
-				", gender='" + gender + '\n' +
-				", birth='" + birth + '\n' +
-				", position='" + position + '\n' +
-				", address='" + address + '\n' +
-				", incidentDate='" + incidentDate + '\n' +
-				", phoneNumber='" + phoneNumber + '\n' +
-				'}';
+		return 	"직원 ID = " + employeeID + '\n' +
+				", 이름 = " + employeeName + '\n' +
+				", 성별 = " + gender + '\n' +
+				", 생년월일 = " + birth + '\n' +
+				", 직급 = " + position + '\n' +
+				", 주소 = " + address + '\n' +
+				", 입사날짜 = " + incidentDate + '\n' +
+				", 연락처 = " + phoneNumber;
 	}
+
 	public SellingRecordListImpl getSellingRecordList() {
 		return sellingRecordList;
 	}
@@ -115,9 +114,5 @@ public class Employee {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-
-
-
 
 }

@@ -1,5 +1,10 @@
+import compensation.CompensationClaim;
+import compensation.CompensationClaimListImpl;
+import compensation.Survey;
 import complaint.Complaint;
 import complaint.ComplaintListImpl;
+import contract.Contract;
+import contract.ContractListImpl;
 import customer.Customer;
 import customer.CustomerList;
 import customer.CustomerListImpl;
@@ -10,21 +15,14 @@ import customer.personalHistory.PersonalHistoryImpl;
 import employee.Employee;
 import employee.EmployeeListImpl;
 import employee.sellingRecord.SellingRecord;
-import insurance.Insurance;
-import insurance.InsuranceApplication.InsuranceApplication;
-import insurance.InsuranceApplication.InsuranceApplicationListImpl;
-import insurance.InsuranceListImpl;
-import compensation.CompensationClaim;
-import compensation.CompensationClaimListImpl;
-import compensation.Survey;
-import contract.Contract;
-import contract.ContractListImpl;
+import exception.CustomException;
 import insurance.*;
+import contract.tempContract.TempContract;
+import contract.tempContract.TempContractListImpl;
 import partner.Partner;
 import partner.PartnerListImpl;
 import partner.rate.Rate;
 import payment.Payment;
-import payment.PaymentListImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,16 +37,14 @@ public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     private static int insuranceIndex = 1;
-    private static int insuranceApplicationIndex = 1;
+    private static int tempContractIndex = 1;
 
-    private static InsuranceApplicationListImpl insuranceApplicationList; // 보험 가입 신청 내역을 저장하는 리스트
-    private static InsuranceApplication insuranceApplication;
+    private static TempContractListImpl tempContractList; // 보험 가입 신청 내역을 저장하는 리스트
 
     private static ContractListImpl contractList;
     private static PartnerListImpl partnerList;
     private static CompensationClaimListImpl compensationClaimList;
     private static InsuranceListImpl insuranceList;
-    private static PaymentListImpl paymentList;
     private static CustomerList customerList;
     private static ComplaintListImpl complaintList;
     private static EmployeeListImpl employeeList;
@@ -67,62 +63,65 @@ public class Main {
 
         customerList = new CustomerListImpl();
 
-        insuranceApplicationList = new InsuranceApplicationListImpl();
+        tempContractList = new TempContractListImpl();
 
         employeeList = new EmployeeListImpl();
         complaintList = new ComplaintListImpl();
 
-
         String userChoice = "";
         while (!userChoice.equals("x")) {
             showMenu();
-            userChoice = br.readLine().trim();
-            switch (userChoice) {
-                case "1":
-                    claimInsurance();
-                    break;
-                case "2":
-                    queryInsurance();
-                    break;
-                case "3":
-                    checkMyInsurance();
-                    break;
-                case "4":
-                    fileComplaint();
-                    break;
-                case "5":
-                    payInsurance();
-                    break;
-                case "6":
-                    queryPartnerCompanies();
-                    break;
-                case "7":
-                    assessDamage();
-                    break;
-                case "8":
-                    registerInsurance();
-                    break;
-                case "9":
-                    modifyInsurance();
-                    break;
-                case "10":
-                    queryCustomerInfo();
-                    break;
-                case "11":
-                    queryEmployeeInfo();
-                    break;
-                case "12":
-                    queryContractInfo();
-                    break;
-                case "13":
-                    queryInsuranceApplication();
-                    break;
-                case "x":
-                    break;
-                default:
-                    if (!userChoice.equals("x")) {
-                        System.out.println("Invalid choice. Please try again.");
-                    }
+            try {
+                userChoice = br.readLine().trim();
+                switch (userChoice) {
+                    case "1":
+                        claimInsurance();
+                        break;
+                    case "2":
+                        queryInsurance();
+                        break;
+                    case "3":
+                        checkMyInsurance();
+                        break;
+                    case "4":
+                        fileComplaint();
+                        break;
+                    case "5":
+                        payInsurance();
+                        break;
+                    case "6":
+                        queryPartnerCompanies();
+                        break;
+                    case "7":
+                        assessDamage();
+                        break;
+                    case "8":
+                        registerInsurance();
+                        break;
+                    case "9":
+                        modifyInsurance();
+                        break;
+                    case "10":
+                        queryCustomerInfo();
+                        break;
+                    case "11":
+                        queryEmployeeInfo();
+                        break;
+                    case "12":
+                        queryContractInfo();
+                        break;
+                    case "13":
+                        queryInsuranceApplication();
+                        break;
+                    case "x":
+                        break;
+                    default:
+                        if (!userChoice.equals("x")) {
+                            System.out.println("Invalid choice. Please try again.");
+                        }
+                }
+            } catch(CustomException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -144,7 +143,7 @@ public class Main {
         System.out.println("x. Exit");
     }
 
-    public static void claimInsurance() throws IOException {
+    public static void claimInsurance() throws IOException, CustomException {
         System.out.println("가입자의 아이디와 보험 아이디를 입력해주세요");
         System.out.print("고객 아이디 : ");
         String customerId = br.readLine().trim();
@@ -154,9 +153,9 @@ public class Main {
         Contract contract = contractList.getContractByID(customerId + insuranceId);
         if (contract != null) {
             System.out.println("계약 정보:");
-            System.out.println("보험 이름: " + contract.getInsuranceName());
-            System.out.println("고객 이름: " + contract.getCustomerName());
-            System.out.println("전화번호: " + contract.getPhoneNumber());
+            System.out.println("보험 이름: " + contract.getInsurance().getInsuranceName());
+            System.out.println("고객 이름: " + contract.getCustomer().getCustomerName());
+            System.out.println("전화번호: " + contract.getCustomer().getPhoneNumber());
 
             System.out.println("\n금액을 청구하시겠습니까?");
             System.out.print("Y / N : ");
@@ -171,7 +170,7 @@ public class Main {
         }
     }
 
-    public static void processClaim(Contract contract) throws IOException {
+    public static void processClaim(Contract contract) throws IOException, CustomException {
         System.out.println("청구 정보를 입력해주세요.");
 
         System.out.print("접수자 이름: ");
@@ -194,21 +193,20 @@ public class Main {
             System.out.println("누락된 정보가 존재합니다.");
             return;
         }
-        Partner partner = partnerList.getPartnerByName(partnerName);
-        CompensationClaim compensationClaim = new CompensationClaim(contract.getCustomerID(), contract.getCustomerName(), claimDocument,
-                contract.getInsuranceID(), contract.getInsuranceName());
-//메인에서 함수 호출하면 안됨.
-        if(partner != null) {
-            compensationClaimList.add(compensationClaim);
-            System.out.println("\n청구가 완료되었습니다.");
-        } else {
-            System.out.println("\n 해당 정보가 존재하지 않습니다.");
-        }
+
+        //내부 클래스에서 예외 시 Throw 사용
+        partnerList.getPartnerByName(partnerName);
+
+        CompensationClaim compensationClaim = new CompensationClaim(contract.getCustomer().getCustomerID(), contract.getCustomer().getCustomerName(), claimDocument,
+                contract.getInsurance().getInsuranceID(), contract.getInsurance().getInsuranceName());
+
+        compensationClaimList.add(compensationClaim);
+        System.out.println("\n청구가 완료되었습니다.");
     }
 
-    public static void queryInsurance() throws IOException {
+    public static void queryInsurance() throws IOException, CustomException {
         System.out.println("보험 조회를 처리합니다.");
-//        insuranceList = insuranceList.get();
+
         //보험 정보 출력
         for (Insurance insurance : insuranceList.get()) {
             System.out.println(insurance.getInsuranceID() + " / " + insurance.getInsuranceName() + " / " + insurance.getPaymentAmount() + " / " + insurance.getCompensationAmount() +"\n");
@@ -216,10 +214,7 @@ public class Main {
         System.out.println("조회를 원하는 보험 ID를 입력해주세요 : ");
         String userChoice = br.readLine().trim();
         Insurance seletedInsurance = insuranceList.getInsuranceByID(userChoice);
-        if (seletedInsurance == null) {
-            System.out.println("입력하신 보험은 존재하지 않습니다.");
-            return;
-        }
+
         System.out.println(seletedInsurance.getInsuranceID() + " / " + seletedInsurance.getInsuranceName()
                 + " / " + seletedInsurance.getPaymentAmount() + " / " + seletedInsurance.getCompensationAmount()
                 + " / " + seletedInsurance.getCycleType() + " / " + seletedInsurance.getPaymentCycle()
@@ -228,19 +223,11 @@ public class Main {
         userChoice = br.readLine().trim();
 
         if (userChoice.equals("x")) return;
-        String id = userChoice;
-        Insurance insurance = insuranceList.getInsuranceByID(id);
-        if (insurance == null) {
-            System.out.println("해당 정보가 존재하지 않습니다");
-            return;
-        }
+
         System.out.println("고객 ID를 입력해주세요");
         String customerId = br.readLine().trim();
         Customer customer = customerList.getCustomerByID(customerId);
-        if (customer == null) {
-            System.out.println("해당 정보가 존재하지 않습니다");
-            return;
-        }
+
         //신청 완료된 경우
         // 현재 날짜와 시간 가져오기
         LocalDateTime now = LocalDateTime.now();
@@ -248,35 +235,27 @@ public class Main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         // 포맷된 현재 날짜와 시간 문자열로 변환
         String formattedNow = now.format(formatter);
-        InsuranceApplication insuranceApplication = new InsuranceApplication(insuranceApplicationIndex++, customer.getCustomerID() ,seletedInsurance.getInsuranceID(), formattedNow);
-        insuranceApplicationList.add(insuranceApplication);
+        TempContract tempContract = new TempContract(tempContractIndex++, customer.getCustomerID() ,seletedInsurance.getInsuranceID(), formattedNow);
+        tempContractList.add(tempContract);
         System.out.println("신청이 완료되었습니다.");
-
-
     }
 
-    public static void checkMyInsurance() throws IOException {
+    public static void checkMyInsurance() throws IOException, CustomException {
         System.out.println("아이디를 입력해 주세요.");
         String customerId = br.readLine().trim();
         Customer customer = customerList.getCustomerByID(customerId);
-        if (customer == null) {
-            System.out.println("일치하는 아이디가 없습니다.");
-            return;
-        }
+
         System.out.println(customer.getName() + " 님 확인 되었습니다.");
         System.out.println(customer.getName() + "님의 보험 리스트 입니다.");
         for (Contract contract : contractList.getContractList()) {
-            if (contract.getCustomerID().equals(customerId)) {
-                System.out.println(". 계약 ID: " + contract.getContractID() + ". 보험 ID: " + contract.getInsuranceID() + ", 보험 이름: " + contract.getInsuranceName()
-                        + ", 보험료: " + contract.getPaymentAmount() + ", 보상금: " + contract.getCompensationAmount());
-            }
+            contract.toString();
         }
         System.out.print("선택할 계약 번호를 입력하세요: ");
         String choice = br.readLine().trim();
         Contract contract = contractList.getContractByID(choice);
 
-        System.out.println(contract.getInsuranceID() + " " + contract.getInsuranceName() + " " + contract.getPaymentAmount() +
-                " " + contract.getCompensationAmount() + " " + contract.getCycleType() + " " + contract.getPaymentCycle() + " " + contract.getInsurancePeriod());
+        System.out.println(contract.getInsurance().getInsuranceID() + " " + contract.getInsurance().getInsuranceName() + " " + contract.getInsurance().getPaymentAmount() +
+                " " + contract.getInsurance().getCompensationAmount() + " " + contract.getInsurance().getCycleType() + " " + contract.getInsurance().getPaymentCycle() + " " + contract.getInsurance().getInsurancePeriod());
         System.out.println("해지하시겠습니까? Y/N");
         choice = br.readLine().trim();
         if (choice.equals("N")) return;
@@ -296,14 +275,14 @@ public class Main {
         if (!submit.equals("제출")) System.out.println("제출이 취소되었습니다.");
         System.out.println("제출이 완료되었습니다.");
             //해지환급금이 있는 경우
-        if (contract.getCycleType().equals("비갱신")) {
+        if (contract.getInsurance().getCycleType().equals("비갱신")) {
             System.out.println("===================================");
             System.out.println("      보험 해지 환급금 정보");
             System.out.println("===================================");
             System.out.println();
             System.out.println("해지 환급금 약관:");
             System.out.println("   - 해지 시점까지 납부한 보험료 중 일부 환급");
-            System.out.println("   - 환급 금액: " + contract.carculateCancelMoney() + "원");
+            System.out.println("   - 환급 금액: " + contract.calculateCancelMoney() + "원");
             System.out.println();
             System.out.println("===================================");
             System.out.println();
@@ -364,17 +343,6 @@ public class Main {
     }
     // ------------------checkMyInsurance 내부 함수들 끝----------------------
 
-
-    public static void requestRefund(Insurance insurance) {
-        System.out.println("보험 ID: " + insurance.getInsuranceID() + "에 대한 환급금 지급 요청이 처리되었습니다.");
-
-        int refundAmount = calculateRefund(insurance);
-        System.out.println("환급금: " + refundAmount + "원이 지급될 예정입니다.");
-    }
-    private static int calculateRefund(Insurance insurance) {
-        return (int) (insurance.getPaymentAmount() * 0.8); // 예시: 납입 금액의 80% 환급
-    }
-
     public static void fileComplaint() throws IOException {
         System.out.println("아이디를 입력하세요: ");String userID = br.readLine().trim();
         while(userID.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");userID = br.readLine().trim();}
@@ -384,7 +352,7 @@ public class Main {
         complaintList.add(complaint);
         System.out.println("접수가 완료되었습니다.");
     }
-    public static void payInsurance() throws IOException {
+    public static void payInsurance() throws IOException, CustomException {
         System.out.println("고객 아이디를 입력해주세요");
         System.out.print("아이디 : ");
         String customerId = br.readLine().trim();
@@ -393,9 +361,9 @@ public class Main {
         System.out.println("보험 목록:");
 
         for (Contract contract : contractList.getContractList()) {
-            if (contract.getCustomerID().equals(customerId)) {
-                System.out.println("보험 ID: " + contract.getInsuranceID() + ", 보험 이름: " + contract.getInsuranceName()
-                        + ", 보험료: " + contract.getPaymentAmount());
+            if (contract.getCustomer().getCustomerID().equals(customerId)) {
+                System.out.println("보험 ID: " + contract.getInsurance().getInsuranceID() + ", 보험 이름: " + contract.getInsurance().getInsuranceName()
+                        + ", 보험료: " + contract.getInsurance().getPaymentAmount());
             }
         }
 
@@ -405,12 +373,8 @@ public class Main {
 
         Contract contract = contractList.getContractByID(customerId + insuranceId);
 
-        if (contract == null) {
-            System.out.println("해당 보험을 찾을 수 없습니다.");
-            return;
-        } else {
-            System.out.println("보험명: " + contract.getInsuranceName() + ", 보험료: " + contract.getPaymentAmount());
-        }
+        System.out.println("보험명: " + contract.getInsurance().getInsuranceName() + ", 보험료: " + contract.getInsurance().getPaymentAmount());
+
 
         // 4. 납부 정보 입력창과 버튼(제출) 출력
         System.out.println("\n납부 정보를 입력하세요.");
@@ -422,13 +386,13 @@ public class Main {
         System.out.print("예금주명: ");
         String accountHolder = br.readLine().trim();
 
-        Payment payment = new Payment(contract.getCustomerID(), contract.getInsuranceID(), contract.getPaymentAmount(), bankName, accountNumber, accountHolder);
+        Payment payment = new Payment(contract.getCustomer().getCustomerID(), contract.getInsurance().getInsuranceID(), contract.getInsurance().getPaymentAmount(), bankName, accountNumber, accountHolder);
         contract.getPaymentList().add(payment);
         // 6. 납부 완료 메시지 출력
         System.out.println("\n납부가 완료되었습니다.");
     }
 
-    public static void queryPartnerCompanies() throws IOException {
+    public static void queryPartnerCompanies() throws IOException, CustomException {
         for (Partner partner : partnerList.get()) {
             System.out.println(partner.getPartnerName() + " / "  + partner.getPartnerType());
         }
@@ -448,32 +412,28 @@ public class Main {
             System.out.println("저장이 완료되었습니다.");
         } else {
             Partner selectedPartner = partnerList.getPartnerByName(userInput);
-            if(selectedPartner != null) {
-                System.out.println(selectedPartner.getPartnerName() + " / " + selectedPartner.getPartnerType()
-                        + " / " + selectedPartner.getPartnerAddress() + " / " + selectedPartner.getPartnerPhoneNumber());
-                System.out.println("업체를 평가하시겠습니까? (Y/N): ");
-                userInput = br.readLine().trim();
-                if(userInput.equals("Y")) {
-                    System.out.println("평가자 이름을 입력해주세요: ");
-                    String employeeName = br.readLine().trim();
-                    while(employeeName.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");employeeName = br.readLine().trim();}
-                    System.out.println("평점을 입력해주세요: ");
-                    String rates = br.readLine().trim();
-                    while(rates.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");rates = br.readLine().trim();}
-                    System.out.println("평가 내용을 입력해주세요: ");
-                    String content = br.readLine().trim();
-                    while(content.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");content = br.readLine().trim();}
+            System.out.println(selectedPartner.getPartnerName() + " / " + selectedPartner.getPartnerType()
+                    + " / " + selectedPartner.getPartnerAddress() + " / " + selectedPartner.getPartnerPhoneNumber());
+            System.out.println("업체를 평가하시겠습니까? (Y/N): ");
+            userInput = br.readLine().trim();
+            if(userInput.equals("Y")) {
+                System.out.println("평가자 이름을 입력해주세요: ");
+                String employeeName = br.readLine().trim();
+                while(employeeName.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");employeeName = br.readLine().trim();}
+                System.out.println("평점을 입력해주세요: ");
+                String rates = br.readLine().trim();
+                while(rates.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");rates = br.readLine().trim();}
+                System.out.println("평가 내용을 입력해주세요: ");
+                String content = br.readLine().trim();
+                while(content.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");content = br.readLine().trim();}
 
-                    Rate rate = new Rate(employeeName, Integer.parseInt(rates), content);
-                    selectedPartner.getRateList().add(rate);
-                    System.out.println("평가가 완료되었습니다.");
-                }
-            } else {
-                System.out.println("입력하신 업체는 존재하지 않습니다.");
+                Rate rate = new Rate(employeeName, Integer.parseInt(rates), content);
+                selectedPartner.getRateList().add(rate);
+                System.out.println("평가가 완료되었습니다.");
             }
         }
     }
-    public static void assessDamage() throws IOException {
+    public static void assessDamage() throws IOException, CustomException {
         for (CompensationClaim compensationClaim : compensationClaimList.get()) {
             System.out.println(compensationClaim.getContractID() + " / " + compensationClaim.getInsuranceName()
                     +  " / " + compensationClaim.getCustomerName());
@@ -484,47 +444,41 @@ public class Main {
             System.out.println("손해 사정할 계약 ID를 입력하세요: ");
             String contractID = br.readLine().trim();
             Contract contract = contractList.getContractByID(contractID);
-            if(contract != null) {
-                System.out.println("직원 이름을 입력해주세요: ");
-                String managerName = br.readLine();
-                while(managerName.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");managerName = br.readLine().trim();}
-                System.out.println("청구 서류를 제출해주세요: ");
-                String documentFile = br.readLine();
-                while(documentFile.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");documentFile = br.readLine().trim();}
-                System.out.println("청구 금액을 입력해주세요: ");
-                String compensationClaimAmount = br.readLine();
-                while(compensationClaimAmount.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");compensationClaimAmount = br.readLine().trim();}
-                System.out.println("면/부책 사유를 입력해주세요: ");
-                String reason = br.readLine();
-                while(reason.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");reason = br.readLine().trim();}
-                System.out.println("총 보상금을 입력해주세요: ");
-                String surveyAmount = br.readLine();
-                while(surveyAmount.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");surveyAmount = br.readLine().trim();}
-                for (CompensationClaim compensationClaim : compensationClaimList.get()) {
-                    if(contractID.equals(contract.getContractID())) {
-                        compensationClaim.setSurvey(new Survey(contract.getCustomerID(), contract.getInsuranceID(), managerName, Integer.parseInt(surveyAmount), reason));
-                        break;
-                    }
+            System.out.println("직원 이름을 입력해주세요: ");
+            String managerName = br.readLine();
+            while(managerName.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");managerName = br.readLine().trim();}
+            System.out.println("청구 서류를 제출해주세요: ");
+            String documentFile = br.readLine();
+            while(documentFile.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");documentFile = br.readLine().trim();}
+            System.out.println("청구 금액을 입력해주세요: ");
+            String compensationClaimAmount = br.readLine();
+            while(compensationClaimAmount.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");compensationClaimAmount = br.readLine().trim();}
+            System.out.println("면/부책 사유를 입력해주세요: ");
+            String reason = br.readLine();
+            while(reason.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");reason = br.readLine().trim();}
+            System.out.println("총 보상금을 입력해주세요: ");
+            String surveyAmount = br.readLine();
+            while(surveyAmount.isEmpty()){System.out.println("입력 정보가 누락되었습니다. 다시 입력해주세요: ");surveyAmount = br.readLine().trim();}
+            for (CompensationClaim compensationClaim : compensationClaimList.get()) {
+                if(contractID.equals(contract.getContractID())) {
+                    compensationClaim.setSurvey(new Survey(contract.getCustomer().getCustomerID(), contract.getInsurance().getInsuranceID(), managerName, Integer.parseInt(surveyAmount), reason));
+                    break;
                 }
-                System.out.println("저장이 완료되었습니다.");
-            } else {
-                System.out.println("입력하신 계약은 존재하지 않습니다.");
             }
+            System.out.println("저장이 완료되었습니다.");
+
         } else if (userInput.equals("보상금 요청")) {
             System.out.println("보상금을 요청할 계약 ID를 입력하세요: ");
             String contractID = br.readLine().trim();
             CompensationClaim compensationClaim = compensationClaimList.getCompensationClaimByID(contractID);
-            if(compensationClaim != null) {
-                System.out.println(compensationClaim.getSurvey().getManagerName()
-                        + " / " + compensationClaim.getDocumentFile()
-                        + " / " + compensationClaim.getSurvey().getReason()
-                        + " / " + compensationClaim.getSurvey().getSurveyAmount());
-                System.out.println("보상금 요청을 완료하려면 엔터를 눌러주세요");
-                br.readLine().trim();
-                System.out.println("요청이 완료되었습니다.");
-            } else {
-                System.out.println("입력하신 정보는 존재하지 않습니다.");
-            }
+
+            System.out.println(compensationClaim.getSurvey().getManagerName()
+                    + " / " + compensationClaim.getDocumentFile()
+                    + " / " + compensationClaim.getSurvey().getReason()
+                    + " / " + compensationClaim.getSurvey().getSurveyAmount());
+            System.out.println("보상금 요청을 완료하려면 엔터를 눌러주세요");
+            br.readLine().trim();
+            System.out.println("요청이 완료되었습니다.");
         }
     }
     public static void registerInsurance() throws IOException {
@@ -588,36 +542,26 @@ public class Main {
 
         Insurance healthInsurance = new HealthInsurance(insurance, diseaseList);
         insuranceList.add(healthInsurance);
-
     }
 
     private static void registerCarInsurance(Insurance insurance) throws IOException {
-        System.out.print("자동차 모델: ");
+        System.out.print("자동차 종류: ");
         String carModel = br.readLine().trim();
 
-        System.out.print("주행 거리: ");
-        String carDistance = br.readLine().trim();
-
-        System.out.print("자동차 생산 연도: ");
-        String carYear = br.readLine().trim();
-
-        Insurance carInsurance = new CarInsurance(insurance, carDistance, carModel, carYear);
+        Insurance carInsurance = new CarInsurance(insurance, carModel);
 
         insuranceList.add(carInsurance);
     }
 
     private static void registerTravelInsurance(Insurance insurance) throws IOException {
-        System.out.print("여행 국가명: ");
+        System.out.print("국가명: ");
         String countryName = br.readLine().trim();
 
-        System.out.print("여행 날짜: ");
-        int travelDate = Integer.parseInt(br.readLine().trim());
-
-        Insurance travelInsurance = new TravelInsurance(insurance, countryName, travelDate);
+        Insurance travelInsurance = new TravelInsurance(insurance, countryName);
         insuranceList.add(travelInsurance);
     }
 
-    public static void modifyInsurance() throws IOException {
+    public static void modifyInsurance() throws IOException, CustomException {
         System.out.println("보험 수정을 처리합니다.\n");
 
         // 2. 보험 이름 입력창 출력
@@ -627,19 +571,9 @@ public class Main {
         // 3. 해당 정보를 입력 후 조회
         Insurance insurance = insuranceList.getInsuranceByName(insuranceName);
 
-        if (insurance == null) {
-            System.out.println("해당 정보가 존재하지 않습니다");
-            return;
-        }
-
         // 4. 해당 보험의 정보 수정창 출력
         System.out.println("현재 보험 정보:");
-        System.out.println("보험 이름: " + insurance.getInsuranceName());
-        System.out.println("보험료: " + insurance.getPaymentAmount());
-        System.out.println("보상금: " + insurance.getCompensationAmount());
-        System.out.println("갱신 상태: " + insurance.getCycleType());
-        System.out.println("갱신 주기: " + insurance.getPaymentCycle());
-        System.out.println("보험 기간: " + insurance.getInsurancePeriod());
+        System.out.println(insurance.toString());
 
         System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
 
@@ -685,7 +619,7 @@ public class Main {
         System.out.println("\n수정이 완료되었습니다.");
     }
 
-    public static void queryCustomerInfo() throws IOException{
+    public static void queryCustomerInfo() throws IOException, CustomException{
         System.out.println("고객 정보 조회를 처리합니다.");
         System.out.println("1. 고객 정보 조회");
         System.out.println("2. 고객 정보 등록");
@@ -763,53 +697,49 @@ public class Main {
         System.out.println("고객 정보가 등록되었습니다.");
     }
 
-    public static void modifyCustomerInfo() throws IOException {
+    public static void modifyCustomerInfo() throws IOException, CustomException {
         System.out.println("고객 정보를 수정합니다.");
         System.out.print("수정할 고객 ID: ");
         String customerId = br.readLine().trim();
         Customer customer = customerList.getCustomerByID(customerId);
-        if (customer != null) {
-            System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
-            System.out.print("이름 (" + customer.getName() + "): ");
-            String name = br.readLine().trim();
-            if (!name.isEmpty()) customer.setName(name);
-            System.out.print("성별 (" + customer.getGender() + "): ");
-            String gender = br.readLine().trim();
-            if (!gender.isEmpty()) customer.setGender(gender);
-            System.out.print("생년월일 (" + customer.getBirth() + "): ");
-            String birth = br.readLine().trim();
-            if (!birth.isEmpty()) customer.setBirth(birth);
-            System.out.print("전화번호 (" + customer.getPhoneNumber() + "): ");
-            String phoneNumber = br.readLine().trim();
-            if (!phoneNumber.isEmpty()) customer.setPhoneNumber(phoneNumber);
-            System.out.print("이메일 (" + customer.getEmail() + "): ");
-            String email = br.readLine().trim();
-            if (!email.isEmpty()) customer.setEmail(email);
-            System.out.print("주소 (" + customer.getAddress() + "): ");
-            String address = br.readLine().trim();
-            if (!address.isEmpty()) customer.setAddress(address);
-            System.out.print("직업 (" + customer.getJob() + "): ");
-            String job = br.readLine().trim();
-            if (!job.isEmpty()) customer.setJob(job);
-            System.out.println("수정이 완료되었습니다.");
-        } else {
-            System.out.println("일치하는 고객 정보가 없습니다.");
-        }
+
+        System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
+        System.out.print("이름 (" + customer.getName() + "): ");
+        String name = br.readLine().trim();
+        if (!name.isEmpty()) customer.setName(name);
+        System.out.print("성별 (" + customer.getGender() + "): ");
+        String gender = br.readLine().trim();
+        if (!gender.isEmpty()) customer.setGender(gender);
+        System.out.print("생년월일 (" + customer.getBirth() + "): ");
+        String birth = br.readLine().trim();
+        if (!birth.isEmpty()) customer.setBirth(birth);
+        System.out.print("전화번호 (" + customer.getPhoneNumber() + "): ");
+        String phoneNumber = br.readLine().trim();
+        if (!phoneNumber.isEmpty()) customer.setPhoneNumber(phoneNumber);
+        System.out.print("이메일 (" + customer.getEmail() + "): ");
+        String email = br.readLine().trim();
+        if (!email.isEmpty()) customer.setEmail(email);
+        System.out.print("주소 (" + customer.getAddress() + "): ");
+        String address = br.readLine().trim();
+        if (!address.isEmpty()) customer.setAddress(address);
+        System.out.print("직업 (" + customer.getJob() + "): ");
+        String job = br.readLine().trim();
+        if (!job.isEmpty()) customer.setJob(job);
+        System.out.println("수정이 완료되었습니다.");
     }
 
-    private static void viewCustomerInfo() throws IOException {
+    private static void viewCustomerInfo() throws IOException, CustomException {
         for (Customer customer : customerList.get()) {
             System.out.println(customer.getCustomerID() + " / " + customer.getName() + " / " + customer.getPhoneNumber());
         }
         System.out.print("조회할 고객 ID를 입력해주세요: ");
         String customerId = br.readLine().trim();
         Customer customer = customerList.getCustomerByID(customerId);
-        if (customer != null) System.out.println(customer.toString());
-        else System.out.println("일치하는 고객 정보가 없습니다.");
+        System.out.println(customer.toString());
     }
     //---------------queryCustomerInfo 내부 함수들 끝----------------
 
-    public static void queryEmployeeInfo() throws IOException{
+    public static void queryEmployeeInfo() throws IOException, CustomException{
         System.out.println("직원 정보 조회를 처리합니다.");
         System.out.println("1. 직원 정보 조회");
         System.out.println("2. 직원 정보 등록");
@@ -832,7 +762,7 @@ public class Main {
         }
 
     }
-    public static void viewEmployeeInfo() throws IOException {
+    public static void viewEmployeeInfo() throws IOException, CustomException {
         System.out.println("직원 정보 조회를 처리합니다.");
         for (Employee employee : employeeList.get()) {
             System.out.println(employee.getEmployeeID() + " / " + employee.getEmployeeName() + " / " + employee.getEmployeePhoneNumber());
@@ -840,31 +770,28 @@ public class Main {
         System.out.println("상세 정보를 확인하려면 직원 ID를 입력하세요: ");
         String employeeID = br.readLine().trim();
         Employee employee = employeeList.getEmployeeByID(employeeID);
-        if(employee != null) {
-            System.out.println(employee.toString());
-            System.out.println("판매 실적을 조회하려면 \"판매 실적 조회\"를 입력하세요.");
-            String userInput = br.readLine().trim();
-            if (userInput.equals("판매 실적 조회")) {
-                for (SellingRecord sellingRecord : employee.getSellingRecordList().get()) {
-                    System.out.println(sellingRecord.getCustomerID() + " / " + sellingRecord.getInsuranceID() + " / " + sellingRecord.getContractDate());
-                }
-                System.out.println("판매 실적을 등록하려면 \"판매 실적 등록\"을 입력하세요.");
-                userInput = br.readLine().trim();
-                if (userInput.equals("판매 실적 등록")) {
-                    System.out.println("고객 ID를 입력하세요: ");
-                    String customerID = br.readLine();
-                    System.out.println("가입한 보험 ID를 입력하세요: ");
-                    String insuranceID = br.readLine();
-                    System.out.println("가입 일자를 입력하세요: ");
-                    String contractDate = br.readLine();
-                    System.out.println("등록을 완료하려면 엔터를 눌러주세요.");
-                    br.readLine();
-                    employee.getSellingRecordList().add(new SellingRecord(customerID, insuranceID, contractDate));
-                    System.out.println("등록이 완료되었습니다.");
-                }
+
+        System.out.println(employee.toString());
+        System.out.println("판매 실적을 조회하려면 \"판매 실적 조회\"를 입력하세요.");
+        String userInput = br.readLine().trim();
+        if (userInput.equals("판매 실적 조회")) {
+            for (SellingRecord sellingRecord : employee.getSellingRecordList().get()) {
+                System.out.println(sellingRecord.getCustomerID() + " / " + sellingRecord.getInsuranceID() + " / " + sellingRecord.getContractDate());
             }
-        } else {
-            System.out.println("입력하신 직원 ID는 존재하지 않습니다.");
+            System.out.println("판매 실적을 등록하려면 \"판매 실적 등록\"을 입력하세요.");
+            userInput = br.readLine().trim();
+            if (userInput.equals("판매 실적 등록")) {
+                System.out.println("고객 ID를 입력하세요: ");
+                String customerID = br.readLine();
+                System.out.println("가입한 보험 ID를 입력하세요: ");
+                String insuranceID = br.readLine();
+                System.out.println("가입 일자를 입력하세요: ");
+                String contractDate = br.readLine();
+                System.out.println("등록을 완료하려면 엔터를 눌러주세요.");
+                br.readLine();
+                employee.getSellingRecordList().add(new SellingRecord(customerID, insuranceID, contractDate));
+                System.out.println("등록이 완료되었습니다.");
+            }
         }
     }
 
@@ -893,53 +820,48 @@ public class Main {
         System.out.println("고객 정보가 등록되었습니다.");
     }
 
-    public static void modifyEmployeeInfo() throws IOException {
+    public static void modifyEmployeeInfo() throws IOException, CustomException {
         System.out.println("직원 정보를 수정합니다.");
         System.out.print("수정할 직원 ID: ");
         String customerId = br.readLine().trim();
         Employee employee = employeeList.getEmployeeByID(customerId);
-        if (employee != null) {
-            System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
-            System.out.print("직원 ID (" + employee.getEmployeeID() + "): ");
-            String id = br.readLine().trim();
-            if (!id.isEmpty()) employee.setEmployeeID(id);
 
-            System.out.print("이름 (" + employee.getEmployeeName() + "): ");
-            String name = br.readLine().trim();
-            if (!name.isEmpty()) employee.setEmployeeName(name);
+        System.out.println("\n새로운 정보를 입력하세요 (변경하지 않으려면 Enter 키를 누르세요):");
+        System.out.print("직원 ID (" + employee.getEmployeeID() + "): ");
+        String id = br.readLine().trim();
+        if (!id.isEmpty()) employee.setEmployeeID(id);
 
-            System.out.print("성별 (" + employee.getGender() + "): ");
-            String gender = br.readLine().trim();
-            if (!gender.isEmpty()) employee.setGender(gender);
+        System.out.print("이름 (" + employee.getEmployeeName() + "): ");
+        String name = br.readLine().trim();
+        if (!name.isEmpty()) employee.setEmployeeName(name);
 
-            System.out.print("생년월일 (" + employee.getBirth() + "): ");
-            String birth = br.readLine().trim();
-            if (!birth.isEmpty()) employee.setBirth(birth);
+        System.out.print("성별 (" + employee.getGender() + "): ");
+        String gender = br.readLine().trim();
+        if (!gender.isEmpty()) employee.setGender(gender);
 
-            System.out.print("직급 (" + employee.getPosition() + "): ");
-            String position = br.readLine().trim();
-            if (!position.isEmpty()) employee.setPosition(position);
+        System.out.print("생년월일 (" + employee.getBirth() + "): ");
+        String birth = br.readLine().trim();
+        if (!birth.isEmpty()) employee.setBirth(birth);
 
-            System.out.print("주소 (" + employee.getAddress() + "): ");
-            String address = br.readLine().trim();
-            if (!address.isEmpty()) employee.setAddress(address);
+        System.out.print("직급 (" + employee.getPosition() + "): ");
+        String position = br.readLine().trim();
+        if (!position.isEmpty()) employee.setPosition(position);
 
-            System.out.print("입사날짜 (" + employee.getIncidentDate() + "): ");
-            String hireDate = br.readLine().trim();
-            if (!hireDate.isEmpty()) employee.setIncidentDate(hireDate);
+        System.out.print("주소 (" + employee.getAddress() + "): ");
+        String address = br.readLine().trim();
+        if (!address.isEmpty()) employee.setAddress(address);
 
-            System.out.print("연락처 (" + employee.getEmployeePhoneNumber() + "): ");
-            String contact = br.readLine().trim();
-            if (!contact.isEmpty()) employee.setEmployeePhoneNumber(contact);
-            System.out.println("수정이 완료되었습니다.");
-        } else {
-            System.out.println("일치하는 고객 정보가 없습니다.");
-        }
+        System.out.print("입사날짜 (" + employee.getIncidentDate() + "): ");
+        String hireDate = br.readLine().trim();
+        if (!hireDate.isEmpty()) employee.setIncidentDate(hireDate);
+
+        System.out.print("연락처 (" + employee.getEmployeePhoneNumber() + "): ");
+        String contact = br.readLine().trim();
+        if (!contact.isEmpty()) employee.setEmployeePhoneNumber(contact);
+        System.out.println("수정이 완료되었습니다.");
     }
 
-    public static void queryContractInfo() throws IOException{
-        // 이 부분도 유저별 계약 정보가 다르게 할 꺼면 로직 바꿔야 됨.
-        // 지금은 보험 별로 계약 정보가 똑같다고 가정하고 만들어진 로직임.
+    public static void queryContractInfo() throws IOException, CustomException{
 
         System.out.println("계약 정보 조회를 처리합니다.");
         viewContract();
@@ -958,34 +880,28 @@ public class Main {
             default:
                 System.out.println("유효하지 않은 선택입니다. 다시 시도해 주세요.");
         }
-
-
     }
 
     //-------------------queryContractInfo 내부 함수들--------------------
 
 
-    public static void renewContract() throws IOException {
+    public static void renewContract() throws IOException, CustomException {
         System.out.println("계약 갱신을 요청합니다.");
         System.out.print("갱신할 계약 번호: ");
         String contractId = br.readLine().trim();
         Contract contract = contractList.getContractByID(contractId);
-        if (contract != null) {
-            System.out.println("갱신 요청이 완료되었습니다..");
-        } else {
-            System.out.println("일치하는 계약 정보가 없습니다.");
-        }
+
+        System.out.println("갱신 요청이 완료되었습니다..");
+
     }
-    public static void requestPayment() throws IOException {
+    public static void requestPayment() throws IOException, CustomException {
         System.out.println("납부 요청을 처리합니다.");
         System.out.print("납부할 계약 번호: ");
         String contractId = br.readLine().trim();
         Contract contract = contractList.getContractByID(contractId);
-        if (contract != null) {
-            System.out.println("납부 요청이 완료되었습니다..");
-        } else {
-            System.out.println("일치하는 계약 정보가 없습니다.");
-        }
+
+        System.out.println("납부 요청이 완료되었습니다..");
+
     }
 
     private static void viewContract() throws IOException {
@@ -994,31 +910,22 @@ public class Main {
     }
     //-------------------queryContractInfo 내부 함수들 끝 --------------------
 
-
-    public static void queryInsuranceApplication() throws IOException {
+    public static void queryInsuranceApplication() throws IOException, CustomException {
         System.out.println("보험 가입 신청 내역 조회를 처리합니다.");
-        System.out.println(insuranceApplicationList.getAllApplications());
+        System.out.println(tempContractList.getAllApplications());
         System.out.print("승인할 신청 ID: ");
         String applicationId = br.readLine().trim();
-        InsuranceApplication application = insuranceApplicationList.getInsuranceApplicationById(applicationId);
-        if (application == null) {
-            System.out.println("일치하는 신청 내역이 없습니다.");
-            return;
-        }
+        TempContract application = tempContractList.getInsuranceApplicationById(applicationId);
+
         Customer customer = customerList.getCustomerByID(application.getCustomerId());
         Insurance insurance = insuranceList.getInsuranceByID(application.getInsuranceId());
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedNow = now.format(formatter);
 
-        Contract contract = new Contract(customer.getAddress(), customer.getAge(), customer.getBirth(), insurance.getCompensationAmount(),formattedNow, customer.getCustomerID(),
-                customer.getName(), insurance.getCycleType(), customer.getEmail(), customer.getGender(),
-                insurance.getInsuranceID(), insurance.getInsuranceName(), insurance.getPaymentAmount(), insurance.getPaymentCycle(),
-                customer.getPhoneNumber(), insurance.getInsurancePeriod());
+        Contract contract = new Contract(customer, insurance, formattedNow);
         contractList.add(contract);
         System.out.println("보험 가입 신청이 승인되었습니다.");
     }
-
     //--------------------------queryInsuranceApplication 내부 함수들 끝------------------
-
 }

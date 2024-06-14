@@ -1,5 +1,7 @@
 package partner;
 
+import exception.CustomException;
+
 import java.util.ArrayList;
 
 public class PartnerListImpl implements PartnerList {
@@ -24,13 +26,13 @@ public class PartnerListImpl implements PartnerList {
 		return partnerList;
 	}
 
-	public Partner getPartnerByName(String name) {
+	public Partner getPartnerByName(String name) throws CustomException{
 		for (Partner partner : partnerList) {
 			if (partner.getPartnerName().equals(name)) {
 				return partner;
 			}
 		}
-		return null;
+		throw new CustomException("해당 정보가 존재하지 않습니다.");
 	}
 
 
